@@ -1,22 +1,33 @@
+import { useRef } from "react";
 import { Outlet } from "react-router";
-import TodoList from "../../features/todos/components/TodoList";
+import { SidebarProvider } from "../../features/sidebar/context/SidebarContext";
+
 import Sidebar from "../layout/Sidebar";
+import Header from "../layout/Header";
+import TodoList from "../../features/todos/components/TodoList";
+import { useReducedWheelScroll } from "../hooks/useReducedWheelScroll";
 
 const Layout = () => {
+  const mainScrollRef = useRef(null);
+  useReducedWheelScroll(mainScrollRef, 0.58);
+
   return (
-    <div className="flex h-dvh">
-      <Sidebar />
-      <div>
-        <header>
-          <h1>My App</h1>
-        </header>
-        <main>
-          <h1>Some task:</h1>
-          <Outlet />
-          <TodoList />
-        </main>
+    <SidebarProvider>
+      <div className="flex h-dvh min-h-0 overflow-hidden">
+        <Sidebar />
+        <div className="flex min-h-0 min-w-0 flex-1 flex-col">
+          <Header userName="Sarah" />
+          <main
+            ref={mainScrollRef}
+            className="scrollbar-minimal-main min-h-0 flex-1 overflow-y-auto overscroll-y-contain"
+          >
+            
+            <Outlet />
+            <TodoList />
+          </main>
+        </div>
       </div>
-    </div>
+    </SidebarProvider>
   );
 };
 
