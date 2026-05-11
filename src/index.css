@@ -4,3 +4,85 @@ body {
   height: 100dvh;
   box-sizing: border-box;
 }
+
+/**
+ * Minimal scrollbars: invisible track, pastel rose-peach thumb (todo / sidebar UI).
+ * WebKit + Firefox. Smooth scroll for programmatic jumps; wheel damping in JS.
+ */
+@layer utilities {
+  .scrollbar-minimal {
+    scroll-behavior: smooth;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(232, 165, 168, 0.55) transparent;
+  }
+
+  .scrollbar-minimal::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  .scrollbar-minimal::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .scrollbar-minimal::-webkit-scrollbar-thumb {
+    background-color: rgba(232, 165, 168, 0.5);
+    border-radius: 9999px;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+  }
+
+  .scrollbar-minimal::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(220, 145, 155, 0.62);
+  }
+
+  .scrollbar-minimal::-webkit-scrollbar-thumb:active {
+    background-color: rgba(205, 128, 138, 0.72);
+  }
+
+  .scrollbar-minimal::-webkit-scrollbar-corner {
+    background: transparent;
+  }
+
+  /** Main column: wider gutter; slightly deeper pastel for contrast on cream main. */
+  .scrollbar-minimal-main {
+    scroll-behavior: smooth;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(228, 158, 168, 0.58) transparent;
+  }
+
+  .scrollbar-minimal-main::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  .scrollbar-minimal-main::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .scrollbar-minimal-main::-webkit-scrollbar-thumb {
+    background-color: rgba(228, 158, 168, 0.52);
+    border-radius: 9999px;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+  }
+
+  .scrollbar-minimal-main::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(215, 138, 152, 0.64);
+  }
+
+  .scrollbar-minimal-main::-webkit-scrollbar-thumb:active {
+    background-color: rgba(200, 122, 138, 0.74);
+  }
+
+  .scrollbar-minimal-main::-webkit-scrollbar-corner {
+    background: transparent;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scrollbar-minimal,
+  .scrollbar-minimal-main {
+    scroll-behavior: auto;
+  }
+}
