@@ -10,7 +10,7 @@ const Header = ({ userName = "Sarah" }) => {
       <div className="flex min-w-0 items-center gap-3 sm:flex-1 sm:gap-4">
         <button
           type="button"
-          className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl text-neutral-700 transition hover:bg-neutral-200/50 sm:hidden"
+          className="flex z-10 h-10 w-10 shrink-0 items-center justify-center rounded-xl text-neutral-700 transition hover:bg-neutral-200/50 sm:hidden"
           onClick={toggleSidebar}
           aria-label={isSidebarOpen ? "Close menu" : "Open menu"}
         >

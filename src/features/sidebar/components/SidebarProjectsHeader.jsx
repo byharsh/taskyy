@@ -9,7 +9,7 @@ const SidebarProjectsHeader = ({ onPlusClick }) => {
       <button
         type="button"
         onClick={onPlusClick}
-        className="flex h-8 w-8 items-center justify-center rounded-full text-amber-400 transition hover:bg-amber-50 hover:text-amber-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-300"
+        className="cursor-pointer flex h-8 w-8 items-center justify-center rounded-full text-amber-400 transition hover:bg-amber-50 hover:text-amber-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-300"
         aria-label="Add new project"
       >
         <Plus
