@@ -11,7 +11,13 @@ const ACCENT_ICON = {
   rose: "bg-white text-rose-600 ring-1 ring-white/80",
 };
 
-const SidebarProjectItem = ({ name, icon: Icon, accent = "purple", isActive, count }) => {
+const SidebarProjectItem = ({
+  name,
+  icon: Icon,
+  accent = "purple",
+  isActive,
+  count,
+}) => {
   if (isActive) {
     return (
       <li>

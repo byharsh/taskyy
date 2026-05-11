@@ -3,51 +3,52 @@ import AchievementSection from "./AchievementSection";
 import CreateTodoButton from "./CreateTodoButton";
 import TodoForm from "./TodoForm";
 import { TodoItem } from "./TodoItem";
+import { SAMPLE_TODOS } from "../../../utils/TODOS";
 
-const SAMPLE_TODOS = [
-  {
-    id: 1,
-    task_title: "Morning Yoga & Meditation 🧘‍♀️",
-    category: "Personal",
-    categoryVariant: "personal",
-  },
-  {
-    id: 2,
-    task_title: "Team standup prep",
-    category: "Work",
-    categoryVariant: "work",
-  },
-  {
-    id: 3,
-    task_title: "Laundry & kitchen reset",
-    category: "Chores",
-    categoryVariant: "chores",
-  },
-  {
-    id: 4,
-    task_title: "Read one chapter",
-    category: "Growth",
-    categoryVariant: "growth",
-  },
-  {
-    id: 5,
-    task_title: "Call mum ☎️",
-    category: "Family",
-    categoryVariant: "family",
-  },
-  {
-    id: 6,
-    task_title: "Invoice follow-ups",
-    category: "Side Hustle",
-    categoryVariant: "sideHustle",
-  },
-  {
-    id: 7,
-    task_title: "Sketch app wireframes",
-    category: "Work",
-    categoryVariant: "work",
-  },
-];
+// const SAMPLE_TODOS = [
+//   {
+//     id: 1,
+//     task_title: "Morning Yoga & Meditation 🧘‍♀️",
+//     category: "Personal",
+//     categoryVariant: "personal",
+//   },
+//   {
+//     id: 2,
+//     task_title: "Team standup prep",
+//     category: "Work",
+//     categoryVariant: "work",
+//   },
+//   {
+//     id: 3,
+//     task_title: "Laundry & kitchen reset",
+//     category: "Chores",
+//     categoryVariant: "chores",
+//   },
+//   {
+//     id: 4,
+//     task_title: "Read one chapter",
+//     category: "Growth",
+//     categoryVariant: "growth",
+//   },
+//   {
+//     id: 5,
+//     task_title: "Call mum ☎️",
+//     category: "Family",
+//     categoryVariant: "family",
+//   },
+//   {
+//     id: 6,
+//     task_title: "Invoice follow-ups",
+//     category: "Side Hustle",
+//     categoryVariant: "sideHustle",
+//   },
+//   {
+//     id: 7,
+//     task_title: "Sketch app wireframes",
+//     category: "Work",
+//     categoryVariant: "work",
+//   },
+// ];
 
 const TodoList = () => {
   const [todos, setTodos] = useState(SAMPLE_TODOS);

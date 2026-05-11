@@ -1,10 +1,4 @@
-import {
-  Briefcase,
-  Home,
-  Lightbulb,
-  Pencil,
-  Rocket,
-} from "lucide-react";
+import { Briefcase, Home, Lightbulb, Pencil, Rocket } from "lucide-react";
 import avatar from "../../assets/images/avatar.jpg";
 import { useRef, useState } from "react";
 import { useSidebarContext } from "../../features/sidebar/context/SidebarContext";
@@ -59,11 +53,14 @@ const INITIAL_PROJECTS = [
 
 const Sidebar = () => {
   const { isSidebarOpen } = useSidebarContext();
+
   const [projects, setProjects] = useState(INITIAL_PROJECTS);
   const [showProjectForm, setShowProjectForm] = useState(false);
   const [newProjectName, setNewProjectName] = useState("");
+
   const asideScrollRef = useRef(null);
   const projectListScrollRef = useRef(null);
+
   useReducedWheelScroll(asideScrollRef, 0.58);
   useReducedWheelScroll(projectListScrollRef, 0.58);
 
@@ -96,7 +93,7 @@ const Sidebar = () => {
   return (
     <aside
       ref={asideScrollRef}
-      className={`${!isSidebarOpen && "hidden"} scrollbar-minimal h-full min-w-0 shrink-0 self-stretch overflow-y-auto border-r border-neutral-200/70 bg-white sm:block w-[min(20rem,calc(100vw-1rem))] sm:min-w-[19rem] sm:w-[19rem] md:min-w-[21rem] md:w-[21rem] lg:min-w-[22rem] lg:w-[22rem]`}
+      className={`${!isSidebarOpen && "hidden"} absolute z-10 sm:static shadow-sm  scrollbar-minimal h-full min-w-0 shrink-0 self-stretch overflow-y-auto border-r border-neutral-200/70 bg-white sm:block w-[min(20rem,calc(100vw-1rem))] sm:min-w-[19rem] sm:w-[19rem] md:min-w-[21rem] md:w-[21rem] lg:min-w-[22rem] lg:w-[22rem]`}
     >
       <div className="flex h-full min-h-0 flex-col">
         <SidebarUserSection avatarSrc={avatar} />
