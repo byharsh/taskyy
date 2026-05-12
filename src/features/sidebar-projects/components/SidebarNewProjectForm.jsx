@@ -14,19 +14,22 @@ const iconCell =
   "flex h-9 w-9 shrink-0 items-center justify-center rounded-xl shadow-sm";
 
 const ICON_OPTIONS = [
-  { key: "rocket", Icon: Rocket, accent: "bg-white text-rose-600 ring-1 ring-neutral-200/70" },
-  { key: "briefcase", Icon: Briefcase, accent: "bg-purple-100 text-purple-700" },
+  {
+    key: "rocket",
+    Icon: Rocket,
+    accent: "bg-white text-rose-600 ring-1 ring-neutral-200/70",
+  },
+  {
+    key: "briefcase",
+    Icon: Briefcase,
+    accent: "bg-purple-100 text-purple-700",
+  },
   { key: "lightbulb", Icon: Lightbulb, accent: "bg-sky-100 text-sky-700" },
   { key: "pencil", Icon: Pencil, accent: "bg-pink-100 text-pink-700" },
   { key: "home", Icon: Home, accent: "bg-emerald-100 text-emerald-700" },
 ];
 
-const SidebarNewProjectForm = ({
-  value,
-  onChange,
-  onConfirm,
-  onCancel,
-}) => {
+const SidebarNewProjectForm = ({ value, onChange, onConfirm, onCancel }) => {
   const [pickerOpen, setPickerOpen] = useState(false);
   const [selectedIconIndex, setSelectedIconIndex] = useState(0);
   const rootRef = useRef(null);

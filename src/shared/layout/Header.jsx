@@ -1,6 +1,6 @@
 import { Bell, Menu, Search, X } from "lucide-react";
 
-import { useSidebarContext } from "../../features/sidebar/context/SidebarContext";
+import { useSidebarContext } from "../../features/sidebar-projects/context/SidebarContext.jsx";
 
 const Header = ({ userName = "Sarah" }) => {
   const { isSidebarOpen, toggleSidebar } = useSidebarContext();
