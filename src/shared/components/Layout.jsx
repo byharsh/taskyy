@@ -6,6 +6,7 @@ import Sidebar from "../layout/Sidebar";
 import Header from "../layout/Header";
 import TodoList from "../../features/todos/components/TodoList";
 import { useReducedWheelScroll } from "../hooks/useReducedWheelScroll";
+import Footer from "../layout/Footer";
 
 const Layout = () => {
   const mainScrollRef = useRef(null);
@@ -21,10 +22,10 @@ const Layout = () => {
             ref={mainScrollRef}
             className="scrollbar-minimal-main min-h-0 flex-1 overflow-y-auto overscroll-y-contain"
           >
-            
             <Outlet />
             <TodoList />
           </main>
+          <Footer />
         </div>
       </div>
     </SidebarProvider>
