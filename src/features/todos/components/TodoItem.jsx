@@ -30,7 +30,7 @@ const TodoItem = ({ children, category, categoryVariant }) => {
   );
 };
 
-TodoItem.Text = ({ taskName, isCompleted }) => {
+TodoItem.Text = ({ taskName, isCompleted, projectId, projectName }) => {
   return (
     <div className="flex min-w-0 flex-1 items-start gap-3">
       <span className="mt-0.5 shrink-0 text-neutral-300 [&_svg]:rounded-md">
@@ -43,6 +43,11 @@ TodoItem.Text = ({ taskName, isCompleted }) => {
       <span className="min-w-0 text-[15px] font-semibold leading-snug text-neutral-800">
         {isCompleted ? <del>{taskName}</del> : taskName}
       </span>
+      {projectId && projectName && (
+        <span className="text-xs text-neutral-500">
+          {projectId} - {projectName}
+        </span>
+      )}
     </div>
   );
 };

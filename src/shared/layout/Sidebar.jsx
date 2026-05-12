@@ -1,7 +1,6 @@
-import { Briefcase, Home, Lightbulb, Pencil, Rocket } from "lucide-react";
 import avatar from "../../assets/images/avatar.jpg";
 import { useRef, useState } from "react";
-import { useSidebarContext } from "../../features/sidebar/context/SidebarContext";
+import { useSidebarContext } from "../../features/sidebar-projects/context/SidebarContext";
 import {
   SidebarGrowCard,
   SidebarNewProjectForm,
@@ -9,52 +8,16 @@ import {
   SidebarProjectItem,
   SidebarProjectsHeader,
   SidebarUserSection,
-} from "../../features/sidebar/components";
+} from "../../features/sidebar-projects/components";
 import { useReducedWheelScroll } from "../hooks/useReducedWheelScroll";
+import { Link } from "react-router";
 
-const INITIAL_PROJECTS = [
-  {
-    id: "1",
-    name: "General",
-    Icon: Rocket,
-    accent: "rose",
-    isActive: true,
-    count: 4,
-  },
-  {
-    id: "2",
-    name: "Personal Work",
-    Icon: Briefcase,
-    accent: "purple",
-    isActive: false,
-  },
-  {
-    id: "3",
-    name: "Side Hustle",
-    Icon: Lightbulb,
-    accent: "blue",
-    isActive: false,
-  },
-  {
-    id: "4",
-    name: "Extra",
-    Icon: Pencil,
-    accent: "pink",
-    isActive: false,
-  },
-  {
-    id: "5",
-    name: "Home Chores",
-    Icon: Home,
-    accent: "green",
-    isActive: false,
-  },
-];
+import { DEMO_PROJECTS } from "../../utils/PROJECTS";
 
 const Sidebar = () => {
   const { isSidebarOpen } = useSidebarContext();
 
-  const [projects, setProjects] = useState(INITIAL_PROJECTS);
+  const [projects, setProjects] = useState(DEMO_PROJECTS);
   const [showProjectForm, setShowProjectForm] = useState(false);
   const [newProjectName, setNewProjectName] = useState("");
 
@@ -120,24 +83,26 @@ const Sidebar = () => {
 
             <ul className="mt-3 flex flex-col gap-3">
               {projects.map((p) => (
-                <SidebarProjectItem
-                  key={p.id}
-                  name={p.name}
-                  icon={p.Icon}
-                  accent={p.accent}
-                  isActive={p.isActive}
-                  count={p.count}
-                />
+                <Link to={`/projects/${p.id}`} key={p.id}>
+                  <SidebarProjectItem
+                    key={p.id}
+                    name={p.name}
+                    icon={p.Icon}
+                    accent={p.accent}
+                    isActive={p.isActive}
+                    count={p.count}
+                  />
+                </Link>
               ))}
             </ul>
           </div>
 
-          {projects.length < 3 ? (
+          {projects.length < 3 && (
             <SidebarGrowCard
               className="shrink-0 pb-2"
               onCreateClick={openProjectFormFromGrow}
             />
-          ) : null}
+          )}
         </div>
 
         <SidebarOptions />
