@@ -7,7 +7,7 @@ import NoTodoPage from "./features/todos/components/NoTodoPage";
 import TodoList from "./features/todos/components/TodoList";
 import NotFoundPage from "./shared/error/NotFoundPage";
 import TodoPage from "./features/todos/components/TodoPage";
-import { projectLoader } from "./loaders/projectLoader";
+import { projectTodoLoader } from "./shared/loaders/projectLoader";
 
 export const router = createBrowserRouter([
   {
@@ -21,7 +21,8 @@ export const router = createBrowserRouter([
       {
         path: "projects/:projectId",
         element: <TodoPage />,
-        loader: projectLoader,
+        loader: projectTodoLoader,
+        hydrateFallbackElement: <NoTodoPage />,
       },
       {
         path: "*",

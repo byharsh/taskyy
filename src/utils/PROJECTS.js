@@ -2,7 +2,7 @@ import { Briefcase, Home, Lightbulb, Pencil, Rocket } from "lucide-react";
 
 export const DEMO_PROJECTS = [
   {
-    id: "1",
+    id: "urt9F27c",
     name: "General",
     Icon: Rocket,
     accent: "rose",
