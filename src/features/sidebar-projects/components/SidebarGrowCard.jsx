@@ -16,6 +16,7 @@ const SidebarGrowCard = ({ onCreateClick, disabled, className = "" }) => {
         className="mt-3 w-full rounded-full border border-rose-200/80 bg-white py-2 text-sm font-semibold text-rose-600 shadow-sm transition hover:bg-rose-50 disabled:cursor-not-allowed disabled:opacity-45"
       >
         Create Page
+        
       </button>
     </div>
   );
