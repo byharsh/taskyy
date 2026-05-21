@@ -6,7 +6,8 @@ export const projectTodoLoader = async ({ params }) => {
 
  
 
-  const todos = await getTodos(projectId);
-  return { todos, projectId };
+  // const todos = await getTodos(projectId);
+  // return { todos, projectId };
+  return { projectId };
   
 };

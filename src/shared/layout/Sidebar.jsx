@@ -9,7 +9,7 @@ import {
   SidebarProjectsHeader,
   SidebarUserSection,
 } from "../../features/sidebar-projects/components";
-import { useReducedWheelScroll } from "../hooks/useReducedWheelScroll";
+
 import { Link } from "react-router";
 
 import { DEMO_PROJECTS } from "../../utils/PROJECTS";
@@ -21,11 +21,7 @@ const Sidebar = () => {
   const [showProjectForm, setShowProjectForm] = useState(false);
   const [newProjectName, setNewProjectName] = useState("");
 
-  const asideScrollRef = useRef(null);
-  const projectListScrollRef = useRef(null);
-
-  useReducedWheelScroll(asideScrollRef, 0.58);
-  useReducedWheelScroll(projectListScrollRef, 0.58);
+  
 
   const openProjectFormFromGrow = () => {
     if (projects.length < 3) setShowProjectForm(true);
@@ -55,7 +51,7 @@ const Sidebar = () => {
 
   return (
     <aside
-      ref={asideScrollRef}
+      
       className={`${!isSidebarOpen && "hidden"} absolute z-10 sm:static shadow-sm  scrollbar-minimal h-full min-w-0 shrink-0 self-stretch overflow-y-auto border-r border-neutral-200/70 bg-white sm:block w-[min(20rem,calc(100vw-1rem))] sm:min-w-[19rem] sm:w-[19rem] md:min-w-[21rem] md:w-[21rem] lg:min-w-[22rem] lg:w-[22rem]`}
     >
       <div className="flex h-full min-h-0 flex-col">
@@ -63,7 +59,7 @@ const Sidebar = () => {
 
         <div className="flex min-h-0 flex-1 flex-col overflow-hidden px-3 pt-2 sm:px-4 sm:pt-3 md:px-5">
           <div
-            ref={projectListScrollRef}
+            
             className="scrollbar-minimal min-h-0 flex-1 overflow-y-auto pb-2"
           >
             <SidebarProjectsHeader
