@@ -1,5 +1,8 @@
 import { forwardRef, useEffect, useRef, useState } from "react";
 import { Check, ChevronDown, X } from "lucide-react";
+
+import {useForm} from "react-hook-form";
+
 import { todoItemCardClass } from "./TodoItem";
 import TodoCategoryTag, {
   TODO_CATEGORY_VARIANT_CLASSES,
@@ -23,68 +26,69 @@ const fieldSurfaceClass =
 const actionBtnClass =
   "flex h-[38px] w-[38px] shrink-0 items-center justify-center rounded-xl border-2 border-transparent transition-colors";
 
-const CategoryPicker = ({ value, onChange, className = "" }) => {
-  const [open, setOpen] = useState(false);
-  const rootRef = useRef(null);
+// const CategoryPicker = ({ value, onChange, className = "" }) => {
 
-  const selected =
-    CATEGORY_OPTIONS.find((o) => o.variant === value) ?? CATEGORY_OPTIONS[0];
+//   const [open, setOpen] = useState(false);
+//   const rootRef = useRef(null);
 
-  useEffect(() => {
-    if (!open) return;
-    const onDoc = (e) => {
-      if (!rootRef.current?.contains(e.target)) setOpen(false);
-    };
-    document.addEventListener("mousedown", onDoc);
-    return () => document.removeEventListener("mousedown", onDoc);
-  }, [open]);
+//   const selected =
+//     CATEGORY_OPTIONS.find((o) => o.variant === value) ?? CATEGORY_OPTIONS[0];
 
-  return (
-    <div ref={rootRef} className={`relative ${className}`}>
-      <button
-        type="button"
-        id="todo-category-trigger"
-        aria-haspopup="listbox"
-        aria-expanded={open}
-        aria-controls="todo-category-listbox"
-        onClick={() => setOpen((o) => !o)}
-        className="flex w-full min-w-0 items-center justify-between gap-2 rounded-xl border border-neutral-200/40 bg-neutral-100/55 px-2.5 py-1.5 text-left transition hover:bg-neutral-100/80 focus:border-neutral-300/80 focus:outline-none"
-      >
-        <TodoCategoryTag label={selected.label} variant={selected.variant} />
-        <ChevronDown
-          className={`h-4 w-4 shrink-0 text-neutral-500 transition ${open ? "rotate-180" : ""}`}
-          aria-hidden
-        />
-      </button>
+//   useEffect(() => {
+//     if (!open) return;
+//     const onDoc = (e) => {
+//       if (!rootRef.current?.contains(e.target)) setOpen(false);
+//     };
+//     document.addEventListener("mousedown", onDoc);
+//     return () => document.removeEventListener("mousedown", onDoc);
+//   }, [open]);
 
-      {open ? (
-        <ul
-          id="todo-category-listbox"
-          role="listbox"
-          aria-labelledby="todo-category-trigger"
-          className="absolute left-0 top-[calc(100%+0.35rem)] z-20 w-full min-w-[8.5rem] overflow-hidden rounded-xl border border-neutral-200/60 bg-white py-1 shadow-lg ring-1 ring-black/5"
-        >
-          {CATEGORY_OPTIONS.map((opt) => (
-            <li key={opt.variant} role="presentation">
-              <button
-                type="button"
-                role="option"
-                aria-selected={opt.variant === value}
-                className={`flex w-full items-center px-2.5 py-2 text-left text-sm font-medium transition hover:brightness-[0.97] active:brightness-95 ${TODO_CATEGORY_VARIANT_CLASSES[opt.variant] ?? TODO_CATEGORY_VARIANT_CLASSES.personal}`}
-                onClick={() => {
-                  onChange(opt.variant);
-                  setOpen(false);
-                }}
-              >
-                {opt.label}
-              </button>
-            </li>
-          ))}
-        </ul>
-      ) : null}
-    </div>
-  );
-};
+//   return (
+//     <div ref={rootRef} className={`relative ${className}`}>
+//       <button
+//         type="button"
+//         id="todo-category-trigger"
+//         aria-haspopup="listbox"
+//         aria-expanded={open}
+//         aria-controls="todo-category-listbox"
+//         onClick={() => setOpen((o) => !o)}
+//         className="flex w-full min-w-0 items-center justify-between gap-2 rounded-xl border border-neutral-200/40 bg-neutral-100/55 px-2.5 py-1.5 text-left transition hover:bg-neutral-100/80 focus:border-neutral-300/80 focus:outline-none"
+//       >
+//         <TodoCategoryTag label={selected.label} variant={selected.variant} />
+//         <ChevronDown
+//           className={`h-4 w-4 shrink-0 text-neutral-500 transition ${open ? "rotate-180" : ""}`}
+//           aria-hidden
+//         />
+//       </button>
+
+//       {open ? (
+//         <ul
+//           id="todo-category-listbox"
+//           role="listbox"
+//           aria-labelledby="todo-category-trigger"
+//           className="absolute left-0 top-[calc(100%+0.35rem)] z-20 w-full min-w-[8.5rem] overflow-hidden rounded-xl border border-neutral-200/60 bg-white py-1 shadow-lg ring-1 ring-black/5"
+//         >
+//           {CATEGORY_OPTIONS.map((opt) => (
+//             <li key={opt.variant} role="presentation">
+//               <button
+//                 type="button"
+//                 role="option"
+//                 aria-selected={opt.variant === value}
+//                 className={`flex w-full items-center px-2.5 py-2 text-left text-sm font-medium transition hover:brightness-[0.97] active:brightness-95 ${TODO_CATEGORY_VARIANT_CLASSES[opt.variant] ?? TODO_CATEGORY_VARIANT_CLASSES.personal}`}
+//                 onClick={() => {
+//                   onChange(opt.variant);
+//                   setOpen(false);
+//                 }}
+//               >
+//                 {opt.label}
+//               </button>
+//             </li>
+//           ))}
+//         </ul>
+//       ) : null}
+//     </div>
+//   );
+// };
 
 const TodoForm = forwardRef(function TodoForm({ onConfirm, onCancel }, ref) {
   const [title, setTitle] = useState("");
@@ -153,11 +157,11 @@ const TodoForm = forwardRef(function TodoForm({ onConfirm, onCancel }, ref) {
         <label className="sr-only" htmlFor="todo-category-trigger">
           Category
         </label>
-        <CategoryPicker
+        {/* <CategoryPicker
           value={categoryVariant}
           onChange={setCategoryVariant}
           className="w-[40%] min-w-[8.25rem] self-start"
-        />
+        /> */}
       </div>
     </form>
   );

@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import {  useEffect, useRef, useState } from "react";
 import AchievementSection from "./AchievementSection";
 import CreateTodoButton from "./CreateTodoButton";
 import TodoForm from "./TodoForm";
@@ -6,13 +6,13 @@ import { TodoItem } from "./TodoItem";
 import { SAMPLE_TODOS } from "../../../utils/TODOS";
 import { useLoaderData } from "react-router";
 import { handleCreateTodo } from "../api/createTodo";
-import { use } from "react";
-import { getTodos } from "../api/getTodo";
+// import { use } from "react";
+// import { getTodos } from "../api/getTodo";
 
 const TodoList = () => {
   const { id: projectId, todos: fetchedTodos } = useLoaderData();
 
-  const [todos, setTodos] = useState(fetchedTodos);
+  const [todos, setTodos] = useState(fetchedTodos || SAMPLE_TODOS);
   const [showForm, setShowForm] = useState(false);
   const formRef = useRef(null);
 
