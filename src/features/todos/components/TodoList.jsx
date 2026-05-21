@@ -17,7 +17,7 @@ const TodoList = () => {
   const formRef = useRef(null);
 
   const handleConfirm = (payload) => {
-    handleCreateTodo({ ...payload, projectId, projectName });
+    handleCreateTodo({ ...payload, projectId, });
     setShowForm(false);
   };
   // setTodos((prev) => {
@@ -62,8 +62,9 @@ const TodoList = () => {
         <ul className="flex w-full flex-col gap-3">
           {todos.map((todo) => (
             <TodoItem
-              key={todo.task_id}
-              category={todo.category}
+            // key={todo.task_id}
+            key={todo.id}
+            category={todo.category}
               categoryVariant={todo.categoryVariant}
             >
               <TodoItem.Text

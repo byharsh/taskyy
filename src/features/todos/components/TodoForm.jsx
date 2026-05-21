@@ -91,6 +91,9 @@ const actionBtnClass =
 // };
 
 const TodoForm = forwardRef(function TodoForm({ onConfirm, onCancel }, ref) {
+
+  const {register, handleSubmit, formState: {errors}} = useForm({mode: "onChange"});
+
   const [title, setTitle] = useState("");
   const [categoryVariant, setCategoryVariant] = useState(
     CATEGORY_OPTIONS[0].variant,
@@ -104,9 +107,12 @@ const TodoForm = forwardRef(function TodoForm({ onConfirm, onCancel }, ref) {
   const selected = CATEGORY_OPTIONS.find((o) => o.variant === categoryVariant);
   const categoryLabel = selected?.label ?? "Personal";
 
-  const submit = () => {
-    const task_title = title.trim();
+  const onSubmit = ( data) => {
+    
+    const task_title = data.task_title.trim();
+    
     if (!task_title) return;
+
     onConfirm({
       task_title,
       category: categoryLabel,
@@ -118,24 +124,22 @@ const TodoForm = forwardRef(function TodoForm({ onConfirm, onCancel }, ref) {
     <form
       ref={ref}
       className={`${formCardClass} w-full max-w-full cursor-default`}
-      onSubmit={(e) => {
-        e.preventDefault();
-        submit();
-      }}
+      onSubmit={handleSubmit(onSubmit)}
     >
       <TodoItemDragHandle className="pointer-events-none mt-0.5" />
 
       <div className="flex min-w-0 flex-1 flex-col gap-1.5">
         <div className="flex min-w-0 items-center gap-2">
           <input
-            ref={inputRef}
+            {...register("task_title", {required: true, minLength: 2})}
+            // ref={inputRef}
             type="text"
-            name="task"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
+            // name="task"
+            // value={title}
+            // onChange={(e) => setTitle(e.target.value)}
             placeholder="write your next task"
-            className={`${fieldSurfaceClass} min-h-[38px] min-w-0 flex-1`}
             autoComplete="off"
+            className={`${fieldSurfaceClass} min-h-[38px] min-w-0 flex-1`}
           />
           <button
             type="submit"
@@ -153,6 +157,12 @@ const TodoForm = forwardRef(function TodoForm({ onConfirm, onCancel }, ref) {
             <X strokeWidth={1.75} className="h-5 w-5" aria-hidden />
           </button>
         </div>
+        {errors.task_title && (
+          <p className="text-sm text-red-600" >
+            {errors.task_title.type === "required" && "A task is required."}
+            {errors.task_title.type === "minLength" && "Task must be at least 2 characters."}
+          </p>
+        )}
 
         <label className="sr-only" htmlFor="todo-category-trigger">
           Category
