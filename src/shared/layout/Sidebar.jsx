@@ -1,5 +1,8 @@
 import avatar from "../../assets/images/avatar.jpg";
 import { useRef, useState } from "react";
+import {v4 as uuid} from "uuid";
+
+
 import { useSidebarContext } from "../../features/sidebar-projects/context/SidebarContext";
 import {
   SidebarGrowCard,
@@ -14,9 +17,12 @@ import { Link } from "react-router";
 
 import { DEMO_PROJECTS } from "../../utils/PROJECTS";
 
-const Sidebar = () => {
-  const { isSidebarOpen } = useSidebarContext();
 
+const Sidebar = () => {
+
+
+  const { isSidebarOpen } = useSidebarContext();
+  
   const [projects, setProjects] = useState(DEMO_PROJECTS);
   const [showProjectForm, setShowProjectForm] = useState(false);
   const [newProjectName, setNewProjectName] = useState("");
@@ -28,23 +34,31 @@ const Sidebar = () => {
   };
 
   const cancelProjectForm = () => {
+    
     setShowProjectForm(false);
     setNewProjectName("");
   };
 
-  const confirmNewProject = () => {
-    const name = newProjectName.trim();
+  const confirmNewProject = (data) => {
+    
+    const name = data.project_name .trim();
     if (!name) return;
+    
+    const randomProject =
+    DEMO_PROJECTS[
+    Math.floor(Math.random() * DEMO_PROJECTS.length)
+        ];
     setProjects((prev) => [
       ...prev,
       {
-        id: `p-${Date.now()}`,
-        name,
-        Icon: Briefcase,
-        accent: "purple",
+        id: uuid(),
+        project_name: name ,
+        Icon: randomProject.Icon,
+        accent: randomProject.accent,
         isActive: false,
       },
     ]);
+    debugger;
     setNewProjectName("");
     setShowProjectForm(false);
   };
@@ -69,8 +83,6 @@ const Sidebar = () => {
             {showProjectForm ? (
               <div className="mt-3">
                 <SidebarNewProjectForm
-                  value={newProjectName}
-                  onChange={setNewProjectName}
                   onConfirm={confirmNewProject}
                   onCancel={cancelProjectForm}
                 />
@@ -82,7 +94,7 @@ const Sidebar = () => {
                 <Link to={`/projects/${p.id}`} key={p.id}>
                   <SidebarProjectItem
                     key={p.id}
-                    name={p.name}
+                    name={p.project_name}
                     icon={p.Icon}
                     accent={p.accent}
                     isActive={p.isActive}

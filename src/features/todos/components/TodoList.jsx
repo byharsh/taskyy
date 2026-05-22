@@ -1,4 +1,7 @@
 import {  useEffect, useRef, useState } from "react";
+
+import { useSearchContext } from "../../context/SearchContext";
+
 import AchievementSection from "./AchievementSection";
 import CreateTodoButton from "./CreateTodoButton";
 import TodoForm from "./TodoForm";
@@ -12,12 +15,20 @@ import { handleCreateTodo } from "../api/createTodo";
 const TodoList = () => {
   const { id: projectId, todos: fetchedTodos } = useLoaderData();
 
+    const { searchQuery } = useSearchContext();
+
   const [todos, setTodos] = useState(fetchedTodos || SAMPLE_TODOS);
   const [showForm, setShowForm] = useState(false);
   const formRef = useRef(null);
 
+
+  const filteredTodos = todos.filter((todo) =>
+    todo.title.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+
   const handleConfirm = (payload) => {
-    handleCreateTodo({ ...payload, projectId, projectName });
+    handleCreateTodo({ ...payload, projectId, });
     setShowForm(false);
   };
   // setTodos((prev) => {
@@ -60,10 +71,11 @@ const TodoList = () => {
         )}
 
         <ul className="flex w-full flex-col gap-3">
-          {todos.map((todo) => (
+          {filteredTodos.map((todo) => (
             <TodoItem
-              key={todo.task_id}
-              category={todo.category}
+            // key={todo.task_id}
+            key={todo.id}
+            category={todo.category}
               categoryVariant={todo.categoryVariant}
             >
               <TodoItem.Text

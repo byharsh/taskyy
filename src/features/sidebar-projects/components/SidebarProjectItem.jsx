@@ -26,7 +26,7 @@ const SidebarProjectItem = ({
           className="flex w-full cursor-pointer items-center gap-2.5 rounded-2xl bg-[#fb7185]/35 px-2 py-2 text-left ring-1 ring-[#fb7185]/40 transition hover:bg-[#fb7185]/45"
         >
           <span className={`${iconWrap} ${ACCENT_ICON.rose}`}>
-            <Icon className="h-[1.15rem] w-[1.15rem]" strokeWidth={2} />
+            {Icon ? <Icon className="h-[1.15rem] w-[1.15rem]" strokeWidth={2} /> : null}
           </span>
           <span className="min-w-0 flex-1 truncate text-sm font-semibold text-white drop-shadow-sm">
             {name}
@@ -56,7 +56,7 @@ const SidebarProjectItem = ({
         className="flex w-full cursor-pointer items-center gap-2.5 rounded-2xl bg-white px-2 py-2 text-left transition hover:bg-neutral-50"
       >
         <span className={`${iconWrap} ${iconTone}`}>
-          <Icon className="h-[1.15rem] w-[1.15rem]" strokeWidth={2} />
+          {Icon ? <Icon className="h-[1.15rem] w-[1.15rem]" strokeWidth={2} /> : null}
         </span>
         <span className="min-w-0 flex-1 truncate text-sm font-medium text-neutral-800">
           {name}
