@@ -1,9 +1,27 @@
+import { useEffect, useState } from "react";
 import { Bell, Menu, Search, X } from "lucide-react";
 
 import { useSidebarContext } from "../../features/sidebar-projects/context/SidebarContext.jsx";
 
+import { useSearchContext } from "../../context/SearchContext.jsx";
+import { useDebounce } from "../../hooks/useDebounce.js";
+
+
+
 const Header = ({ userName = "Sarah" }) => {
+  
   const { isSidebarOpen, toggleSidebar } = useSidebarContext();
+
+    const { updateSearchQuery } = useSearchContext();
+
+  const [inputValue, setInputValue] = useState("");
+
+  const debouncedSearchValue = useDebounce(inputValue, 400);
+
+
+   useEffect(() => {
+    updateSearchQuery(debouncedSearchValue.trim());
+  }, [debouncedSearchValue, updateSearchQuery]);
 
   return (
     <header className="flex w-full shrink-0 flex-col gap-4 bg-[#faf9f6] px-4 py-4 sm:flex-row sm:items-center sm:justify-between sm:gap-6 sm:px-6 sm:py-5">
@@ -41,6 +59,8 @@ const Header = ({ userName = "Sarah" }) => {
           </span>
           <input
             type="search"
+            value={inputValue}
+            onChange={(e) => setInputValue(e.target.value)}
             placeholder="Search tasks..."
             className="w-full min-w-[10rem] rounded-full border border-neutral-200/80 bg-white py-2.5 pl-10 pr-4 text-sm text-neutral-800 shadow-sm outline-none ring-0 transition placeholder:text-neutral-400 focus:border-neutral-300 focus:ring-2 focus:ring-neutral-200/80 sm:min-w-[12rem] sm:py-3"
             autoComplete="off"

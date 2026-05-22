@@ -94,7 +94,7 @@ const TodoForm = forwardRef(function TodoForm({ onConfirm, onCancel }, ref) {
 
   const {register, handleSubmit, formState: {errors}} = useForm({mode: "onChange"});
 
-  const [title, setTitle] = useState("");
+  // const [title, setTitle] = useState("");
   const [categoryVariant, setCategoryVariant] = useState(
     CATEGORY_OPTIONS[0].variant,
   );
