@@ -1,6 +1,6 @@
-import {  useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
-import { useSearchContext } from "../../context/SearchContext";
+import { useSearchContext } from "../context/SearchContext.jsx";
 
 import AchievementSection from "./AchievementSection";
 import CreateTodoButton from "./CreateTodoButton";
@@ -17,7 +17,7 @@ const TodoList = () => {
 
     const { searchQuery } = useSearchContext();
 
-  const [todos, setTodos] = useState(fetchedTodos || SAMPLE_TODOS);
+  const [todos] = useState(fetchedTodos || SAMPLE_TODOS);
   const [showForm, setShowForm] = useState(false);
   const formRef = useRef(null);
 
@@ -36,9 +36,9 @@ const TodoList = () => {
   //   return [{ id, projectId, projectName, ...payload }, ...prev];
   // });
 
-  const handleCancelForm = () => {
+  const handleCancelForm = useCallback(() => {
     setShowForm(false);
-  };
+  }, []);
 
   useEffect(() => {
     if (!showForm) return;

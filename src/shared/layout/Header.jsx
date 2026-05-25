@@ -2,24 +2,19 @@ import { useEffect, useState } from "react";
 import { Bell, Menu, Search, X } from "lucide-react";
 
 import { useSidebarContext } from "../../features/sidebar-projects/context/SidebarContext.jsx";
-
-import { useSearchContext } from "../../context/SearchContext.jsx";
-import { useDebounce } from "../../hooks/useDebounce.js";
-
-
+import { useSearchContext } from "../../features/todos/context/SearchContext.jsx";
+import { useDebounce } from "../../features/todos/hooks/useDebounce.js";
 
 const Header = ({ userName = "Sarah" }) => {
-  
   const { isSidebarOpen, toggleSidebar } = useSidebarContext();
 
-    const { updateSearchQuery } = useSearchContext();
+  const { updateSearchQuery } = useSearchContext();
 
   const [inputValue, setInputValue] = useState("");
 
   const debouncedSearchValue = useDebounce(inputValue, 400);
 
-
-   useEffect(() => {
+  useEffect(() => {
     updateSearchQuery(debouncedSearchValue.trim());
   }, [debouncedSearchValue, updateSearchQuery]);
 

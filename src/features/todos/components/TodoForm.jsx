@@ -1,12 +1,9 @@
-import { forwardRef, useEffect, useRef, useState } from "react";
-import { Check, ChevronDown, X } from "lucide-react";
+import { forwardRef, useEffect, useRef } from "react";
+import { Check, X } from "lucide-react";
 
-import {useForm} from "react-hook-form";
+import { useForm } from "react-hook-form";
 
 import { todoItemCardClass } from "./TodoItem";
-import TodoCategoryTag, {
-  TODO_CATEGORY_VARIANT_CLASSES,
-} from "./TodoCategoryTag";
 import TodoItemDragHandle from "./TodoItemDragHandle";
 
 const CATEGORY_OPTIONS = [
@@ -91,26 +88,24 @@ const actionBtnClass =
 // };
 
 const TodoForm = forwardRef(function TodoForm({ onConfirm, onCancel }, ref) {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({ mode: "onChange" });
 
-  const {register, handleSubmit, formState: {errors}} = useForm({mode: "onChange"});
-
-  // const [title, setTitle] = useState("");
-  const [categoryVariant, setCategoryVariant] = useState(
-    CATEGORY_OPTIONS[0].variant,
-  );
   const inputRef = useRef(null);
 
   useEffect(() => {
     inputRef.current?.focus();
   }, []);
 
-  const selected = CATEGORY_OPTIONS.find((o) => o.variant === categoryVariant);
-  const categoryLabel = selected?.label ?? "Personal";
+  const categoryVariant = CATEGORY_OPTIONS[0].variant;
+  const categoryLabel = CATEGORY_OPTIONS[0].label;
 
-  const onSubmit = ( data) => {
-    
+  const onSubmit = (data) => {
     const task_title = data.task_title.trim();
-    
+
     if (!task_title) return;
 
     onConfirm({
@@ -131,7 +126,7 @@ const TodoForm = forwardRef(function TodoForm({ onConfirm, onCancel }, ref) {
       <div className="flex min-w-0 flex-1 flex-col gap-1.5">
         <div className="flex min-w-0 items-center gap-2">
           <input
-            {...register("task_title", {required: true, minLength: 2})}
+            {...register("task_title", { required: true, minLength: 2 })}
             // ref={inputRef}
             type="text"
             // name="task"
@@ -158,20 +153,16 @@ const TodoForm = forwardRef(function TodoForm({ onConfirm, onCancel }, ref) {
           </button>
         </div>
         {errors.task_title && (
-          <p className="text-sm text-red-600" >
+          <p className="text-sm text-red-600">
             {errors.task_title.type === "required" && "A task is required."}
-            {errors.task_title.type === "minLength" && "Task must be at least 2 characters."}
+            {errors.task_title.type === "minLength" &&
+              "Task must be at least 2 characters."}
           </p>
         )}
 
         <label className="sr-only" htmlFor="todo-category-trigger">
           Category
         </label>
-        {/* <CategoryPicker
-          value={categoryVariant}
-          onChange={setCategoryVariant}
-          className="w-[40%] min-w-[8.25rem] self-start"
-        /> */}
       </div>
     </form>
   );
