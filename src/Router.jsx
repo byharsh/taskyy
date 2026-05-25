@@ -1,13 +1,11 @@
 import Layout from "./shared/layout/Layout";
 
-import { createRoot } from "react-dom/client";
-
-import { createBrowserRouter } from "react-router";
+import { createBrowserRouter, Navigate } from "react-router";
 import NoTodoPage from "./features/todos/components/NoTodoPage";
-import TodoList from "./features/todos/components/TodoList";
 import NotFoundPage from "./shared/error/NotFoundPage";
 import TodoPage from "./features/todos/components/TodoPage";
 import { projectTodoLoader } from "./shared/loaders/projectLoader";
+import AuthPage from "./features/auth/pages/AuthPage";
 
 export const router = createBrowserRouter([
   {
@@ -29,5 +27,25 @@ export const router = createBrowserRouter([
         element: <NotFoundPage />,
       },
     ],
+  },
+  {
+    path: "/login",
+    element: <AuthPage mode="login" />,
+  },
+  {
+    path: "/signup",
+    element: <AuthPage mode="signup" />,
+  },
+  {
+    path: "/auth",
+    element: <Navigate to="/login" replace />,
+  },
+  {
+    path: "/auth/login",
+    element: <Navigate to="/login" replace />,
+  },
+  {
+    path: "/auth/signup",
+    element: <Navigate to="/signup" replace />,
   },
 ]);

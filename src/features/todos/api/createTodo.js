@@ -4,13 +4,13 @@ import { API_BASE_URL } from "../../../utils/services";
 export const handleCreateTodo = (todo) => {
   const newTodo = {
     task_id: uuidv4(),
-    title: todo.title,
+    title: todo.title ?? todo.task_title,
     description: todo.description,
     completed: false,
     created_at: new Date().toISOString(),
     completed_at: null,
     project_id: todo.projectId,
-    project_name: todo.projectName,
+    project_name: todo.projectName ?? todo.project_name,
   };
 
   createTodo(newTodo);
