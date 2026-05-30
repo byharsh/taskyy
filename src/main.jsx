@@ -4,7 +4,10 @@ import { createRoot } from "react-dom/client";
 import "./index.css";
 
 import { router } from "./Router.jsx";
+import { AuthProvider } from "./features/auth/context/AuthContext.jsx";
 
 createRoot(document.getElementById("root")).render(
-  <RouterProvider router={router} />,
+  <AuthProvider>
+    <RouterProvider router={router} />,
+  </AuthProvider>,
 );
