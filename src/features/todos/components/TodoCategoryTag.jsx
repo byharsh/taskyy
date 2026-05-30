@@ -1,4 +1,3 @@
-/** Pastel pill tags — maps preset keys to light bg + darker text (reference UI). */
 export const TODO_CATEGORY_VARIANT_CLASSES = {
   personal: "bg-pink-100 text-pink-800",
   work: "bg-purple-100 text-purple-800",
@@ -12,6 +11,7 @@ const TodoCategoryTag = ({ label, variant = "personal", className = "" }) => {
   const tone =
     TODO_CATEGORY_VARIANT_CLASSES[variant] ??
     TODO_CATEGORY_VARIANT_CLASSES.personal;
+
   return (
     <span
       className={`inline-flex max-w-full items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${tone} ${className}`}

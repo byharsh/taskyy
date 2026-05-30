@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Square, SquareCheck } from "../../../assets/icons";
 import TodoCategoryTag from "./TodoCategoryTag";
 import TodoItemDragHandle from "./TodoItemDragHandle";

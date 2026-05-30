@@ -32,7 +32,7 @@ const ICON_OPTIONS = [
   { key: "home", Icon: Home, accent: "bg-emerald-100 text-emerald-700" },
 ];
 
-const SidebarNewProjectForm = ({ value, onChange, onConfirm, onCancel }) => {
+const SidebarNewProjectForm = ({ onConfirm, onCancel }) => {
 
   const {register, handleSubmit, reset, formState: {errors}} = useForm();
 

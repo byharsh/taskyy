@@ -1,5 +1,3 @@
-import { useLoaderData } from "react-router";
-
 import TodoList from "./TodoList";
 
 const TodoPage = () => {
@@ -7,7 +5,7 @@ const TodoPage = () => {
 
   return (
     <section>
-      <TodoList />;
+      <TodoList />
     </section>
   );
 };

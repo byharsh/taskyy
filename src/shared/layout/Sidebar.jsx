@@ -1,5 +1,5 @@
 import avatar from "../../assets/images/avatar.jpg";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import {v4 as uuid} from "uuid";
 
 
@@ -25,57 +25,43 @@ const Sidebar = () => {
   
   const [projects, setProjects] = useState(DEMO_PROJECTS);
   const [showProjectForm, setShowProjectForm] = useState(false);
-  const [newProjectName, setNewProjectName] = useState("");
-
-  
 
   const openProjectFormFromGrow = () => {
     if (projects.length < 3) setShowProjectForm(true);
   };
 
   const cancelProjectForm = () => {
-    
     setShowProjectForm(false);
-    setNewProjectName("");
   };
 
   const confirmNewProject = (data) => {
-    
-    const name = data.project_name .trim();
+    const name = data.project_name.trim();
     if (!name) return;
-    
+
     const randomProject =
-    DEMO_PROJECTS[
-    Math.floor(Math.random() * DEMO_PROJECTS.length)
-        ];
+      DEMO_PROJECTS[Math.floor(Math.random() * DEMO_PROJECTS.length)];
     setProjects((prev) => [
       ...prev,
       {
         id: uuid(),
-        project_name: name ,
+        project_name: name,
         Icon: randomProject.Icon,
         accent: randomProject.accent,
         isActive: false,
       },
     ]);
-    debugger;
-    setNewProjectName("");
     setShowProjectForm(false);
   };
 
   return (
     <aside
-      
       className={`${!isSidebarOpen && "hidden"} absolute z-10 sm:static shadow-sm  scrollbar-minimal h-full min-w-0 shrink-0 self-stretch overflow-y-auto border-r border-neutral-200/70 bg-white sm:block w-[min(20rem,calc(100vw-1rem))] sm:min-w-[19rem] sm:w-[19rem] md:min-w-[21rem] md:w-[21rem] lg:min-w-[22rem] lg:w-[22rem]`}
     >
       <div className="flex h-full min-h-0 flex-col">
         <SidebarUserSection avatarSrc={avatar} />
 
         <div className="flex min-h-0 flex-1 flex-col overflow-hidden px-3 pt-2 sm:px-4 sm:pt-3 md:px-5">
-          <div
-            
-            className="scrollbar-minimal min-h-0 flex-1 overflow-y-auto pb-2"
-          >
+          <div className="scrollbar-minimal min-h-0 flex-1 overflow-y-auto pb-2">
             <SidebarProjectsHeader
               onPlusClick={() => setShowProjectForm((open) => !open)}
             />
