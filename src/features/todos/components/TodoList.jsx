@@ -1,34 +1,59 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 
 import { useSearchContext } from "../context/SearchContext.jsx";
+import { useLoaderData, useSearchParams } from "react-router";
+import { SAMPLE_TODOS } from "../../../utils/TODOS";
 
 import AchievementSection from "./AchievementSection";
 import CreateTodoButton from "./CreateTodoButton";
 import TodoForm from "./TodoForm";
 import { TodoItem } from "./TodoItem";
-import { SAMPLE_TODOS } from "../../../utils/TODOS";
-import { useLoaderData } from "react-router";
+
 import { handleCreateTodo } from "../api/createTodo";
+import { getTodos } from "../api/getTodo.js";
+
 // import { use } from "react";
 // import { getTodos } from "../api/getTodo";
 
 const TodoList = () => {
   const { id: projectId, todos: fetchedTodos } = useLoaderData();
 
-    const { searchQuery } = useSearchContext();
+  const { searchQuery } = useSearchContext();
 
-  const [todos] = useState(fetchedTodos || SAMPLE_TODOS);
+  const [todos, setTodos] = useState(fetchedTodos || SAMPLE_TODOS);
   const [showForm, setShowForm] = useState(false);
   const formRef = useRef(null);
 
+  //Pagination with URL search params
+
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const page = Number(searchParams.get("page") || 1);
+  const limit = 10;
+
+  useEffect(() => {
+    const loadTodos = async () => {
+      const offset = (page - 1) * limit;
+      const data = await getTodos(projectId, limit, offset);
+      setTodos(data);
+    };
+
+    loadTodos();
+  }, [page, projectId]);
+
+  const handleNextList = () => {
+    setSearchParams({ page: page + 1 });
+  };
+  const handlePrevList = () => {
+    setSearchParams({ page: page - 1 });
+  };
 
   const filteredTodos = todos.filter((todo) =>
-    todo.title.toLowerCase().includes(searchQuery.toLowerCase())
+    todo.title.toLowerCase().includes(searchQuery.toLowerCase()),
   );
 
-
   const handleConfirm = (payload) => {
-    handleCreateTodo({ ...payload, projectId, });
+    handleCreateTodo({ ...payload, projectId });
     setShowForm(false);
   };
   // setTodos((prev) => {
@@ -73,9 +98,9 @@ const TodoList = () => {
         <ul className="flex w-full flex-col gap-3">
           {filteredTodos.map((todo) => (
             <TodoItem
-            // key={todo.task_id}
-            key={todo.id}
-            category={todo.category}
+              // key={todo.task_id}
+              key={todo.id}
+              category={todo.category}
               categoryVariant={todo.categoryVariant}
             >
               <TodoItem.Text
@@ -88,6 +113,11 @@ const TodoList = () => {
             </TodoItem>
           ))}
         </ul>
+        <div>
+          <div onClick={handlePrevList}>Previous</div>
+          <div>{page}</div>
+          <div onClick={handleNextList}>Next</div>
+        </div>
 
         <AchievementSection className="w-full" />
       </div>
