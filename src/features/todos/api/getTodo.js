@@ -1,7 +1,9 @@
 import { API_BASE_URL } from "../../../utils/services";
 
-export const getTodos = async (projectId) => {
-  const response = await fetch(`${API_BASE_URL}?project_id=${projectId}`);
+export const getTodos = async (projectId, limit = 10, offset = 0) => {
+  const response = await fetch(
+    `${API_BASE_URL}?project_id=${projectId}&limit=${limit}&offset=${offset}`,
+  );
   if (!response.ok) {
     throw new Error("Failed to fetch todos");
   }
