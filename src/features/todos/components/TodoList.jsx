@@ -1,52 +1,31 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 
 import { useSearchContext } from "../context/SearchContext.jsx";
-import { useLoaderData, useSearchParams } from "react-router";
+import { useLoaderData } from "react-router";
 import { SAMPLE_TODOS } from "../../../utils/TODOS";
 
 import AchievementSection from "./AchievementSection";
 import CreateTodoButton from "./CreateTodoButton";
 import TodoForm from "./TodoForm";
 import { TodoItem } from "./TodoItem";
-
 import { handleCreateTodo } from "../api/createTodo";
-import { getTodos } from "../api/getTodo.js";
+
+import TodoPagination from "./TodoPagination.jsx";
+import { usePagination } from "../hooks/usePagination.js";
 
 // import { use } from "react";
 // import { getTodos } from "../api/getTodo";
 
 const TodoList = () => {
-  const { id: projectId, todos: fetchedTodos } = useLoaderData();
+  const { projectId, todos: fetchedTodos } = useLoaderData();
+
+  const { page, handleNextPageList, handlePrevPageList } = usePagination();
 
   const { searchQuery } = useSearchContext();
 
   const [todos, setTodos] = useState(fetchedTodos || SAMPLE_TODOS);
   const [showForm, setShowForm] = useState(false);
   const formRef = useRef(null);
-
-  //Pagination with URL search params
-
-  const [searchParams, setSearchParams] = useSearchParams();
-
-  const page = Number(searchParams.get("page") || 1);
-  const limit = 10;
-
-  useEffect(() => {
-    const loadTodos = async () => {
-      const offset = (page - 1) * limit;
-      const data = await getTodos(projectId, limit, offset);
-      setTodos(data);
-    };
-
-    loadTodos();
-  }, [page, projectId]);
-
-  const handleNextList = () => {
-    setSearchParams({ page: page + 1 });
-  };
-  const handlePrevList = () => {
-    setSearchParams({ page: page - 1 });
-  };
 
   const filteredTodos = todos.filter((todo) =>
     todo.title.toLowerCase().includes(searchQuery.toLowerCase()),
@@ -113,11 +92,11 @@ const TodoList = () => {
             </TodoItem>
           ))}
         </ul>
-        <div>
-          <div onClick={handlePrevList}>Previous</div>
-          <div>{page}</div>
-          <div onClick={handleNextList}>Next</div>
-        </div>
+        <TodoPagination
+          page={page}
+          onNext={handleNextPageList}
+          onPrev={handlePrevPageList}
+        />
 
         <AchievementSection className="w-full" />
       </div>
