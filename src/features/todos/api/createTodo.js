@@ -16,17 +16,20 @@ export const handleCreateTodo = (todo) => {
   createTodo(newTodo);
 };
 
-export const createTodo = async (todo) => {
+export const createTodo = async (newTodo) => {
   const response = await fetch(API_BASE_URL, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(todo),
+    body: JSON.stringify(newTodo),
   });
+
   if (!response.ok) {
     throw new Error("Failed to create todo");
   }
+
   const data = await response.json();
+
   return data;
 };
