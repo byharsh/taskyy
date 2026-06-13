@@ -15,6 +15,8 @@ export const projectTodoLoader = async ({ params, request }) => {
 
 //This function used for checking if this loader should be running or not based on page. This only runs on initial load and when projectid changes.
 
-// export const shouldRevalidateProjectLoader = ({ currentParams, nextParams }) => {
+// export const shouldRevalidateProjectLoader =
+// ({ currentParams, nextParams }) =>
+//   {
 //   return currentParams.projectId !== nextParams.projectId;
 // };

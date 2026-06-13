@@ -23,18 +23,22 @@ const TodoList = () => {
 
   const [todos, setTodos] = useState(fetchedTodos || SAMPLE_TODOS);
   const [showForm, setShowForm] = useState(false);
+
   const formRef = useRef(null);
 
   const filteredTodos = todos.filter((todo) =>
     todo.title.toLowerCase().includes(searchQuery.toLowerCase()),
   );
 
-  const handleComplete = (todo) => {
-    if (!todo.isCompleted) return;
-    updateTodo(todo.id, {
-      completed: true,
+  const handleComplete = async (todo) => {
+    if (todo.isCompleted) return;
+
+    const updatedTodos = await updateTodo(todo.id, {
+      is_complete: true,
       completed_at: new Date().toISOString(),
     });
+
+    setTodos(updatedTodos);
   };
 
   const handleConfirm = (payload) => {
@@ -86,7 +90,7 @@ const TodoList = () => {
             >
               <TodoItem.Text
                 taskName={todo.title}
-                isCompleted={todo.isCompleted}
+                // isCompleted={todo.isCompleted}
                 onComplete={() => handleComplete(todo)}
                 projectId={todo.project_id}
                 projectName={todo.project_name}

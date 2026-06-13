@@ -1,7 +1,8 @@
 import { v4 as uuidv4 } from "uuid";
 import { API_BASE_URL } from "../../../utils/services";
+import { removeLocalTodo } from "../../sidebar-projects/api/localProject";
 
-export const handleCreateTodo = (todo) => {
+export const handleCreateTodo = async (todo) => {
   const newTodo = {
     task_id: uuidv4(),
     title: todo.title ?? todo.task_title,
@@ -13,7 +14,9 @@ export const handleCreateTodo = (todo) => {
     project_name: todo.projectName ?? todo.project_name,
   };
 
-  createTodo(newTodo);
+  await createTodo(newTodo);
+
+  removeLocalTodo(todo.projectId);
 };
 
 export const createTodo = async (newTodo) => {
