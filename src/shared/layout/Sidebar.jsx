@@ -1,7 +1,6 @@
 import avatar from "../../assets/images/avatar.jpg";
 import { useState } from "react";
-import {v4 as uuid} from "uuid";
-
+import { v4 as uuid } from "uuid";
 
 import { useSidebarContext } from "../../features/sidebar-projects/context/SidebarContext";
 import {
@@ -16,13 +15,11 @@ import {
 import { Link } from "react-router";
 
 import { DEMO_PROJECTS } from "../../utils/PROJECTS";
-
+import { createProject } from "../../features/sidebar-projects/api/createProjects";
 
 const Sidebar = () => {
-
-
   const { isSidebarOpen } = useSidebarContext();
-  
+
   const [projects, setProjects] = useState(DEMO_PROJECTS);
   const [showProjectForm, setShowProjectForm] = useState(false);
 
@@ -35,21 +32,12 @@ const Sidebar = () => {
   };
 
   const confirmNewProject = (data) => {
-    const name = data.project_name.trim();
-    if (!name) return;
+    const newProject = createProject(data);
 
-    const randomProject =
-      DEMO_PROJECTS[Math.floor(Math.random() * DEMO_PROJECTS.length)];
-    setProjects((prev) => [
-      ...prev,
-      {
-        id: uuid(),
-        project_name: name,
-        Icon: randomProject.Icon,
-        accent: randomProject.accent,
-        isActive: false,
-      },
-    ]);
+    if (!newProject) return;
+
+    setProjects((prev) => [...prev, newProject]);
+
     setShowProjectForm(false);
   };
 
