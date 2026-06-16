@@ -5,11 +5,11 @@ export const AuthRoutes = ({ children, requireAuth }) => {
   const { isAuthenticated } = useAuth();
 
   if (isAuthenticated && !requireAuth) {
-    <Navigate to="/" replace />;
+    return <Navigate to="/" replace />;
   }
 
   if (!isAuthenticated && requireAuth) {
-    <Navigate to="/login" replace />;
+    return <Navigate to="/login" replace />;
   }
 
   return children;
