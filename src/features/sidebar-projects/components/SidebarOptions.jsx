@@ -1,12 +1,11 @@
-import { useNavigate } from "react-router";
 import { Eraser, LogOut, Settings } from "lucide-react";
 
 import { useAuth } from "../../auth/hooks/useAuth";
+import { useNavigate } from "react-router";
 
 const SidebarOptions = () => {
   const { logout } = useAuth();
   const navigate = useNavigate();
-
   const handleSignOut = () => {
     logout();
     navigate("/login");
@@ -19,7 +18,10 @@ const SidebarOptions = () => {
           type="button"
           className="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left text-sm font-medium text-neutral-700 transition hover:bg-neutral-100"
         >
-          <Settings className="h-[1.15rem] w-[1.15rem] text-neutral-500" strokeWidth={2} />
+          <Settings
+            className="h-[1.15rem] w-[1.15rem] text-neutral-500"
+            strokeWidth={2}
+          />
           Settings
         </button>
         <button
@@ -27,7 +29,10 @@ const SidebarOptions = () => {
           onClick={handleSignOut}
           className="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left text-sm font-medium text-neutral-700 transition hover:bg-neutral-100"
         >
-          <LogOut className="h-[1.15rem] w-[1.15rem] text-neutral-500" strokeWidth={2} />
+          <LogOut
+            className="h-[1.15rem] w-[1.15rem] text-neutral-500"
+            strokeWidth={2}
+          />
           Sign out
         </button>
         <button

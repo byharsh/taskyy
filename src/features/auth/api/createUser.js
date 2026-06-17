@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from "uuid";
 
-import { USERS_API_URL } from "../../../utils/services";
+import { API_USER_URL } from "../../../utils/services";
 import { getUserByEmail } from "./getUser";
 
 export const createUser = async ({ name, email, password }) => {
@@ -12,13 +12,13 @@ export const createUser = async ({ name, email, password }) => {
 
   const newUser = {
     user_id: uuidv4(),
-    name,
-    email,
-    password,
+    user_name: name,
+    user_email: email,
+    user_password: password,
     created_at: new Date().toISOString(),
   };
 
-  const response = await fetch(USERS_API_URL, {
+  const response = await fetch(API_USER_URL, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -30,7 +30,7 @@ export const createUser = async ({ name, email, password }) => {
     throw new Error("Failed to create account");
   }
 
-  const { password: _password, ...safeUser } = newUser;
+  const { user_password: _password, user_id: _userId, ...safeUser } = newUser;
 
   return safeUser;
 };

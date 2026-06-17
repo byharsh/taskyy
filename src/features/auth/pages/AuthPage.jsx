@@ -77,8 +77,8 @@ const AuthPage = ({ mode = "login" }) => {
     setFormData((current) => ({ ...current, [field]: event.target.value }));
   };
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     setError("");
     setIsSubmitting(true);
 
@@ -119,7 +119,9 @@ const AuthPage = ({ mode = "login" }) => {
       login(user);
       navigate("/");
     } catch (submitError) {
-      setError(submitError.message || "Something went wrong. Please try again.");
+      setError(
+        submitError.message || "Something went wrong. Please try again.",
+      );
     } finally {
       setIsSubmitting(false);
     }
@@ -141,8 +143,8 @@ const AuthPage = ({ mode = "login" }) => {
                 Built with modern web fundamentals
               </h1>
               <p className="max-w-lg text-sm leading-7 text-[#796e66] sm:text-[15px]">
-                Taskyy uses the core React and web development skills that show up in
-                real projects and job descriptions every day.
+                Taskyy uses the core React and web development skills that show
+                up in real projects and job descriptions every day.
               </p>
             </div>
 
@@ -156,9 +158,14 @@ const AuthPage = ({ mode = "login" }) => {
                     className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-md border border-[#efb4a8] bg-[#fff3ed]"
                     aria-hidden
                   >
-                    <Check className="h-3.5 w-3.5 text-[#d47f72]" strokeWidth={2.5} />
+                    <Check
+                      className="h-3.5 w-3.5 text-[#d47f72]"
+                      strokeWidth={2.5}
+                    />
                   </span>
-                  <span className="text-sm leading-6 text-[#5c524a]">{concept}</span>
+                  <span className="text-sm leading-6 text-[#5c524a]">
+                    {concept}
+                  </span>
                 </li>
               ))}
             </ul>
@@ -237,7 +244,10 @@ const AuthPage = ({ mode = "login" }) => {
                     type="button"
                     className="flex w-full items-center justify-center gap-2 rounded-2xl border border-[#edded4] bg-[#fff8f4] px-4 py-3 text-sm font-medium text-[#4f433c] shadow-[0_10px_22px_rgba(213,154,134,0.08)] transition hover:border-[#efc2b8] hover:bg-[#fff3ed]"
                   >
-                    <Fingerprint className="h-4 w-4 text-[#d47f72]" strokeWidth={2} />
+                    <Fingerprint
+                      className="h-4 w-4 text-[#d47f72]"
+                      strokeWidth={2}
+                    />
                     Sign in with passkey
                   </button>
 
@@ -262,7 +272,12 @@ const AuthPage = ({ mode = "login" }) => {
                     value={formData.email}
                     onChange={updateField("email")}
                     required
-                    rightSlot={<Mail className="h-4 w-4 text-[#b49d91]" strokeWidth={2} />}
+                    rightSlot={
+                      <Mail
+                        className="h-4 w-4 text-[#b49d91]"
+                        strokeWidth={2}
+                      />
+                    }
                   />
 
                   <AuthField
@@ -280,7 +295,9 @@ const AuthPage = ({ mode = "login" }) => {
                         type="button"
                         onClick={() => setShowPassword((current) => !current)}
                         className="text-[#9d8e84] transition hover:text-[#544941]"
-                        aria-label={showPassword ? "Hide password" : "Show password"}
+                        aria-label={
+                          showPassword ? "Hide password" : "Show password"
+                        }
                       >
                         {showPassword ? (
                           <EyeOff className="h-4 w-4" strokeWidth={2} />
@@ -304,7 +321,12 @@ const AuthPage = ({ mode = "login" }) => {
                     value={formData.name}
                     onChange={updateField("name")}
                     required
-                    rightSlot={<UserRound className="h-4 w-4 text-[#b49d91]" strokeWidth={2} />}
+                    rightSlot={
+                      <UserRound
+                        className="h-4 w-4 text-[#b49d91]"
+                        strokeWidth={2}
+                      />
+                    }
                   />
 
                   <AuthField
@@ -317,7 +339,12 @@ const AuthPage = ({ mode = "login" }) => {
                     value={formData.email}
                     onChange={updateField("email")}
                     required
-                    rightSlot={<Mail className="h-4 w-4 text-[#b49d91]" strokeWidth={2} />}
+                    rightSlot={
+                      <Mail
+                        className="h-4 w-4 text-[#b49d91]"
+                        strokeWidth={2}
+                      />
+                    }
                   />
 
                   <AuthField
@@ -335,7 +362,9 @@ const AuthPage = ({ mode = "login" }) => {
                         type="button"
                         onClick={() => setShowPassword((current) => !current)}
                         className="text-[#9d8e84] transition hover:text-[#544941]"
-                        aria-label={showPassword ? "Hide password" : "Show password"}
+                        aria-label={
+                          showPassword ? "Hide password" : "Show password"
+                        }
                       >
                         {showPassword ? (
                           <EyeOff className="h-4 w-4" strokeWidth={2} />
@@ -362,7 +391,9 @@ const AuthPage = ({ mode = "login" }) => {
                         type="button"
                         onClick={() => setShowPassword((current) => !current)}
                         className="text-[#9d8e84] transition hover:text-[#544941]"
-                        aria-label={showPassword ? "Hide password" : "Show password"}
+                        aria-label={
+                          showPassword ? "Hide password" : "Show password"
+                        }
                       >
                         {showPassword ? (
                           <EyeOff className="h-4 w-4" strokeWidth={2} />
@@ -406,7 +437,8 @@ const AuthPage = ({ mode = "login" }) => {
                     }
                   />
                   <span>
-                    I agree to the terms of service and privacy policy for my Taskyy account.
+                    I agree to the terms of service and privacy policy for my
+                    Taskyy account.
                   </span>
                 </label>
               )}

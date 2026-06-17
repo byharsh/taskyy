@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 
-import {useForm} from "react-hook-form";
+import { useForm } from "react-hook-form";
 
 import {
   Briefcase,
@@ -33,19 +33,21 @@ const ICON_OPTIONS = [
 ];
 
 const SidebarNewProjectForm = ({ onConfirm, onCancel }) => {
-
-  const {register, handleSubmit, reset, formState: {errors}} = useForm();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
 
   const [pickerOpen, setPickerOpen] = useState(false);
   const [selectedIconIndex, setSelectedIconIndex] = useState(0);
   const rootRef = useRef(null);
 
-
-
   const handleCancel = () => {
     reset();
     onCancel();
-  }
+  };
 
   useEffect(() => {
     if (!pickerOpen) return;
@@ -111,10 +113,11 @@ const SidebarNewProjectForm = ({ onConfirm, onCancel }) => {
           </div>
         ) : null}
       </div>
+
       <form onSubmit={handleSubmit(onConfirm)}>
         <input
           type="text"
-          {...register("project_name", { required: true, minLength: 3})}
+          {...register("project_name", { required: true, minLength: 3 })}
           placeholder="Create project page..."
           className="mt-3 w-full rounded-xl border border-neutral-200/60 bg-white px-3 py-2.5 text-sm font-medium text-neutral-800 outline-none ring-0 placeholder:text-neutral-400 focus:border-rose-200 focus:ring-2 focus:ring-rose-100"
         />
@@ -122,27 +125,29 @@ const SidebarNewProjectForm = ({ onConfirm, onCancel }) => {
           <p className="mt-1 text-xs text-red-600">Project name is required.</p>
         )}
         {errors.project_name?.type === "minLength" && (
-          <p className="mt-1 text-xs text-red-600">Project name must be at least 3 characters long.</p>
-          
+          <p className="mt-1 text-xs text-red-600">
+            Project name must be at least 3 characters long.
+          </p>
         )}
-      <div className="mt-3 flex items-center justify-center gap-8">
-        <button
-          type="submit"
-          
-          className="inline-flex cursor-pointer items-center gap-1.5 text-sm font-semibold text-emerald-600 transition hover:text-emerald-700"
+
+        <div className="mt-3 flex items-center justify-center gap-8">
+          <button
+            type="submit"
+            className="inline-flex cursor-pointer items-center gap-1.5 text-sm font-semibold text-emerald-600 transition hover:text-emerald-700"
           >
-          <Check className="h-4 w-4" strokeWidth={2.25} aria-hidden />
-          Confirm
-        </button>
-        <button
+            <Check className="h-4 w-4" strokeWidth={2.25} aria-hidden />
+            Confirm
+          </button>
+
+          <button
             onClick={handleCancel}
-          className="inline-flex cursor-pointer items-center gap-1.5 text-sm font-semibold text-neutral-500 transition hover:text-neutral-700"
+            className="inline-flex cursor-pointer items-center gap-1.5 text-sm font-semibold text-neutral-500 transition hover:text-neutral-700"
           >
-          <X className="h-4 w-4" strokeWidth={2.25} aria-hidden />
-          Cancel
-        </button>
-      </div>
-          </form>
+            <X className="h-4 w-4" strokeWidth={2.25} aria-hidden />
+            Cancel
+          </button>
+        </div>
+      </form>
     </div>
   );
 };

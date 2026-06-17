@@ -15,7 +15,10 @@ export const createProject = (data) => {
     accent: randomProject.accent,
   };
 
-  localStorage.setItem("projects", JSON.stringify(["New Project", newProject]));
+  const projects = localStorage.getItem(
+    "projects",
+    JSON.stringify(["New Project", newProject]),
+  );
 
   return newProject;
 };
