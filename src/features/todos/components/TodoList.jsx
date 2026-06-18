@@ -2,19 +2,17 @@ import { useCallback, useEffect, useRef, useState } from "react";
 
 import { useSearchContext } from "../context/SearchContext.jsx";
 import { useLoaderData } from "react-router";
+import { usePagination } from "../hooks/usePagination.js";
+import { handleCreateTodo } from "../api/createTodo";
+import { updateTodo } from "../api/updateTodo.js";
+
 import { SAMPLE_TODOS } from "../../../utils/TODOS";
 
 import AchievementSection from "./AchievementSection";
 import CreateTodoButton from "./CreateTodoButton";
 import TodoForm from "./TodoForm";
 import { TodoItem } from "./TodoItem";
-import { handleCreateTodo } from "../api/createTodo";
-
 import TodoPagination from "./TodoPagination.jsx";
-import { usePagination } from "../hooks/usePagination.js";
-
-// import { use } from "react";
-// import { getTodos } from "../api/getTodo";
 
 const TodoList = () => {
   const { projectId, todos: fetchedTodos } = useLoaderData();
@@ -25,20 +23,28 @@ const TodoList = () => {
 
   const [todos, setTodos] = useState(fetchedTodos || SAMPLE_TODOS);
   const [showForm, setShowForm] = useState(false);
+
   const formRef = useRef(null);
 
   const filteredTodos = todos.filter((todo) =>
     todo.title.toLowerCase().includes(searchQuery.toLowerCase()),
   );
 
+  const handleComplete = async (todo) => {
+    if (todo.isCompleted) return;
+
+    const updatedTodos = await updateTodo(todo.id, {
+      is_complete: true,
+      completed_at: new Date().toISOString(),
+    });
+
+    setTodos(updatedTodos);
+  };
+
   const handleConfirm = (payload) => {
     handleCreateTodo({ ...payload, projectId });
     setShowForm(false);
   };
-  // setTodos((prev) => {
-  //   const id = prev.reduce((max, t) => Math.max(max, t.id), 0) + 1;
-  //   return [{ id, projectId, projectName, ...payload }, ...prev];
-  // });
 
   const handleCancelForm = useCallback(() => {
     setShowForm(false);
@@ -84,7 +90,8 @@ const TodoList = () => {
             >
               <TodoItem.Text
                 taskName={todo.title}
-                isCompleted={todo.isCompleted}
+                // isCompleted={todo.isCompleted}
+                onComplete={() => handleComplete(todo)}
                 projectId={todo.project_id}
                 projectName={todo.project_name}
                 createdAt={todo.created_at}

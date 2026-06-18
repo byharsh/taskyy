@@ -1,7 +1,8 @@
 import { v4 as uuidv4 } from "uuid";
 import { API_BASE_URL } from "../../../utils/services";
+import { removeLocalTodo } from "../../sidebar-projects/api/localProject";
 
-export const handleCreateTodo = (todo) => {
+export const handleCreateTodo = async (todo) => {
   const newTodo = {
     task_id: uuidv4(),
     title: todo.title ?? todo.task_title,
@@ -13,20 +14,25 @@ export const handleCreateTodo = (todo) => {
     project_name: todo.projectName ?? todo.project_name,
   };
 
-  createTodo(newTodo);
+  await createTodo(newTodo);
+
+  removeLocalTodo(todo.projectId);
 };
 
-export const createTodo = async (todo) => {
+export const createTodo = async (newTodo) => {
   const response = await fetch(API_BASE_URL, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(todo),
+    body: JSON.stringify(newTodo),
   });
+
   if (!response.ok) {
     throw new Error("Failed to create todo");
   }
+
   const data = await response.json();
+
   return data;
 };

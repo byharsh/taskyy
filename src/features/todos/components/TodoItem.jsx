@@ -31,19 +31,24 @@ const TodoItem = ({ children, category, categoryVariant }) => {
 TodoItem.Text = ({
   taskName,
   isCompleted,
+  onComplete,
   projectId,
   projectName,
   createdAt,
 }) => {
   return (
     <div className="flex min-w-0 flex-1 items-start gap-3">
-      <span className="mt-0.5 shrink-0 text-neutral-300 [&_svg]:rounded-md">
+      <button
+        onClick={() => onComplete({ isCompleted: !isCompleted })}
+        className="mt-0.5 shrink-0 text-neutral-300 [&_svg]:rounded-md"
+      >
         {isCompleted ? (
           <SquareCheck color="#229b50" strokeWidth={1} absoluteStrokeWidth />
         ) : (
           <Square strokeWidth={2} />
         )}
-      </span>
+      </button>
+
       <span className="min-w-0 text-[15px] font-semibold leading-snug text-neutral-800">
         {isCompleted ? <del>{taskName}</del> : taskName}
       </span>
