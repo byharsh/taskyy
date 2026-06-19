@@ -4,9 +4,11 @@ export const deleteTodo = async (id) => {
   const response = await fetch(`${API_BASE_URL}/${id}`, {
     method: "DELETE",
   });
+
   if (!response.ok) {
     throw new Error("Failed to delete todo");
   }
 
-  return response.json();
+  const data = await response.json();
+  return data;
 };
