@@ -14,7 +14,7 @@ const TodoCategoryTag = ({ label, variant = "personal", className = "" }) => {
 
   return (
     <span
-      className={`inline-flex max-w-full items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${tone} ${className}`}
+      className={`inline-flex max-w-full items-center rounded-full px-2.5 py-0.5 text-xs font-bold tracking-wide ${tone} ${className}`}
     >
       {label}
     </span>

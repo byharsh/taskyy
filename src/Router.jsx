@@ -8,12 +8,13 @@ import { projectTodoLoader } from "./shared/loaders/projectLoader";
 
 import AuthPage from "./features/auth/pages/AuthPage";
 import { AuthRoutes } from "./features/auth/routes/AuthRoutes";
+import PlayGround from "./shared/components/PlayGround";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: (
-      <AuthRoutes requireAuth={true}>
+      <AuthRoutes requireAuth={false}>
         <Layout />
       </AuthRoutes>
     ),
@@ -49,5 +50,9 @@ export const router = createBrowserRouter([
         <AuthPage mode="signup" />
       </AuthRoutes>
     ),
+  },
+  {
+    path: "/playground",
+    element: <PlayGround />,
   },
 ]);
