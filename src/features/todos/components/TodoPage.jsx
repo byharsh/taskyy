@@ -1,11 +1,11 @@
+import { useLoaderData } from "react-router";
 import TodoList from "./TodoList";
 
 const TodoPage = () => {
-  //   const { id, name } = useLoaderData();
-
+  const { projectId, todos: fetchedTodos } = useLoaderData();
   return (
     <section>
-      <TodoList />
+      <TodoList fetchedTodos={fetchedTodos} projectId={projectId} />
     </section>
   );
 };
