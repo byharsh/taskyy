@@ -5,11 +5,14 @@ export const projectTodoLoader = async ({ params, request }) => {
   const url = new URL(request.url);
   const page = Number(url.searchParams.get("page") || 1);
 
+  const search = url.searchParams.get("search") || "";
+
   const limit = 10;
   const offset = (page - 1) * limit;
 
-  const todos = await getTodos(projectId, limit, offset);
+  const todos = await getTodos(projectId, limit, offset, search);
 
+  console.log("yoyo its pojectLoader bitches");
   return { projectId, todos };
 };
 
