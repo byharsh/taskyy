@@ -1,22 +1,44 @@
 import { useEffect, useState } from "react";
 import { Bell, Menu, Search, X } from "lucide-react";
 
-import { useSidebarContext } from "../../features/sidebar-projects/context/SidebarContext.jsx";
-import { useSearchContext } from "../../features/todos/context/SearchContext.jsx";
 import { useDebounce } from "../../features/todos/hooks/useDebounce.js";
 
-const Header = ({ userName = "Sarah" }) => {
+import { useSidebarContext } from "../../features/sidebar-projects/context/SidebarContext.jsx";
+import { useSearchParams } from "react-router";
+
+const Header = ({ userName = "hard Working individual" }) => {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [inputValue, setInputValue] = useState(
+    searchParams.get("search") || "",
+  );
+
   const { isSidebarOpen, toggleSidebar } = useSidebarContext();
-
-  const { updateSearchQuery } = useSearchContext();
-
-  const [inputValue, setInputValue] = useState("");
 
   const debouncedSearchValue = useDebounce(inputValue, 400);
 
+  // useEffect(() => {
+  //   const urlSearch = searchParams.get("search") || "";
+  //   if (urlSearch === inputValue) return;
+  //   setInputValue(urlSearch);
+  // }, [searchParams, inputValue]);
+
   useEffect(() => {
-    updateSearchQuery(debouncedSearchValue.trim());
-  }, [debouncedSearchValue, updateSearchQuery]);
+    const currentUrlSearch = searchParams.get("search") || "";
+    const newSearchValue = debouncedSearchValue.trim();
+
+    if (newSearchValue === currentUrlSearch) return;
+
+    const params = new URLSearchParams(searchParams);
+    if (newSearchValue) {
+      params.set("search", newSearchValue);
+    } else {
+      params.delete("search");
+    }
+
+    params.set("page", "1");
+
+    setSearchParams(params);
+  }, [debouncedSearchValue, setSearchParams, searchParams]);
 
   return (
     <header className="flex w-full shrink-0 flex-col gap-4 bg-[#faf9f6] px-4 py-4 sm:flex-row sm:items-center sm:justify-between sm:gap-6 sm:px-6 sm:py-5">

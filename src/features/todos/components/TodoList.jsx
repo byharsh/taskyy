@@ -1,34 +1,22 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 
-import { useSearchContext } from "../context/SearchContext.jsx";
-import { useLoaderData } from "react-router";
 import { usePagination } from "../hooks/usePagination.js";
-import { handleCreateTodo } from "../api/createTodo";
 import { updateTodo } from "../api/updateTodo.js";
 
-import { SAMPLE_TODOS } from "../../../utils/TODOS";
-
+import { handleCreateTodo } from "../api/createTodo";
+import TodoPagination from "./TodoPagination.jsx";
 import AchievementSection from "./AchievementSection";
 import CreateTodoButton from "./CreateTodoButton";
 import TodoForm from "./TodoForm";
 import { TodoItem } from "./TodoItem";
-import TodoPagination from "./TodoPagination.jsx";
 
-const TodoList = () => {
-  const { projectId, todos: fetchedTodos } = useLoaderData();
-
+const TodoList = ({ projectId, fetchedTodos }) => {
   const { page, handleNextPageList, handlePrevPageList } = usePagination();
 
-  const { searchQuery } = useSearchContext();
-
-  const [todos, setTodos] = useState(fetchedTodos || SAMPLE_TODOS);
+  const [todos, setTodos] = useState(fetchedTodos);
   const [showForm, setShowForm] = useState(false);
 
   const formRef = useRef(null);
-
-  const filteredTodos = todos.filter((todo) =>
-    todo.title.toLowerCase().includes(searchQuery.toLowerCase()),
-  );
 
   const handleComplete = async (todo) => {
     if (todo.isCompleted) return;
@@ -38,7 +26,11 @@ const TodoList = () => {
       completed_at: new Date().toISOString(),
     });
 
-    setTodos(updatedTodos);
+    setTodos((prevTodo) =>
+      prevTodo.map((todo) =>
+        todo.id === updatedTodos.id ? updatedTodos : todo,
+      ),
+    );
   };
 
   const handleConfirm = (payload) => {
@@ -81,7 +73,7 @@ const TodoList = () => {
         )}
 
         <ul className="flex w-full flex-col gap-3">
-          {filteredTodos.map((todo) => (
+          {todos.map((todo) => (
             <TodoItem
               // key={todo.task_id}
               key={todo.id}

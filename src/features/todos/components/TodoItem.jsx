@@ -28,19 +28,12 @@ const TodoItem = ({ children, category, categoryVariant }) => {
   );
 };
 
-TodoItem.Text = ({
-  taskName,
-  isCompleted,
-  onComplete,
-  projectId,
-  projectName,
-  createdAt,
-}) => {
+TodoItem.Text = ({ taskName, isCompleted = false, onComplete }) => {
   return (
-    <div className="flex min-w-0 flex-1 items-start gap-3">
+    <div className="flex bg-red-300 items-center min-w-0 flex-1  gap-3">
       <button
-        onClick={() => onComplete({ isCompleted: !isCompleted })}
-        className="mt-0.5 shrink-0 text-neutral-300 [&_svg]:rounded-md"
+        onClick={() => onComplete(!isCompleted)}
+        className="mt-0.5 shrink-0 text-neutral-300 [&_svg]:rounded-md "
       >
         {isCompleted ? (
           <SquareCheck color="#229b50" strokeWidth={1} absoluteStrokeWidth />
@@ -49,15 +42,9 @@ TodoItem.Text = ({
         )}
       </button>
 
-      <span className="min-w-0 text-[15px] font-semibold leading-snug text-neutral-800">
+      <span className="min-w-0 text-[15px] font-semibold tracking-wide text-neutral-800">
         {isCompleted ? <del>{taskName}</del> : taskName}
       </span>
-      {projectId && projectName && (
-        <span className="text-xs text-neutral-500">
-          {projectId} - {projectName}
-        </span>
-      )}
-      <p>created at:{createdAt}</p>
     </div>
   );
 };
