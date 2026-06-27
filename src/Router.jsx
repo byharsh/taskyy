@@ -14,7 +14,7 @@ export const router = createBrowserRouter([
   {
     path: "/",
     element: (
-      <AuthRoutes requireAuth={false}>
+      <AuthRoutes requireAuth={true}>
         <Layout />
       </AuthRoutes>
     ),
