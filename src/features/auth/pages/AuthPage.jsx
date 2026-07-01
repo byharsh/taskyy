@@ -10,43 +10,17 @@ import {
   UserRound,
 } from "lucide-react";
 
+import {
+  STACK_CONCEPT_LABEL,
+  AUTH_LAYOUT_LABELS,
+  AUTH_FORM_LABELS,
+  STACK_CONCEPT_HEADERS,
+} from "../constants/authConstants";
+
 import { createUser } from "../api/createUser";
 import { loginUser } from "../api/getUser";
 import { AuthField } from "../components";
 import { useAuth } from "../hooks/useAuth";
-
-const stackConcepts = [
-  "React components & JSX",
-  "React Hooks (useState, useEffect, useContext)",
-  "React Router (routing & protected routes)",
-  "Context API for global state",
-  "Custom hooks (useAuth, useDebounce)",
-  "REST API integration with Fetch",
-  "localStorage session persistence",
-  "Tailwind CSS utility-first styling",
-  "Form handling & validation",
-  "Async/await & promise-based flows",
-  "Component composition & feature folders",
-];
-
-const authCopy = {
-  login: {
-    title: "Sign in to Taskyy",
-    subtitle:
-      "Pick up your projects, keep your routine moving, and get back into the flow with a calm, secure sign in.",
-    footerPrompt: "New to Taskyy?",
-    footerLink: "Create your account",
-    footerLinkTo: "/signup",
-  },
-  signup: {
-    title: "Create your Taskyy account",
-    subtitle:
-      "Set up a clean workspace in a few moments and start tracking work, routines, and side projects with less friction.",
-    footerPrompt: "Already have an account?",
-    footerLink: "Sign in instead",
-    footerLinkTo: "/login",
-  },
-};
 
 const switchLinkClassName = ({ isActive }) =>
   [
@@ -58,7 +32,8 @@ const switchLinkClassName = ({ isActive }) =>
 
 const AuthPage = ({ mode = "login" }) => {
   const isLogin = mode === "login";
-  const content = authCopy[isLogin ? "login" : "signup"];
+
+  const content = AUTH_FORM_LABELS[isLogin ? "login" : "signup"];
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -137,19 +112,18 @@ const AuthPage = ({ mode = "login" }) => {
           <div className="relative flex h-full flex-col justify-center gap-8">
             <div className="max-w-xl space-y-4">
               <p className="inline-flex rounded-full border border-[#f1ddd0] bg-white/80 px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-[#9a8679] shadow-[0_8px_20px_rgba(215,160,144,0.1)] backdrop-blur-sm">
-                Skills in this project
+                {STACK_CONCEPT_HEADERS.EYEBROW}
               </p>
               <h1 className="text-3xl font-semibold tracking-tight text-[#2f271f] sm:text-4xl">
-                Built with modern web fundamentals
+                {STACK_CONCEPT_HEADERS.HEADING}
               </h1>
               <p className="max-w-lg text-sm leading-7 text-[#796e66] sm:text-[15px]">
-                Taskyy uses the core React and web development skills that show
-                up in real projects and job descriptions every day.
+                {STACK_CONCEPT_HEADERS.DESCRIPTION}
               </p>
             </div>
 
             <ul className="grid gap-3">
-              {stackConcepts.map((concept) => (
+              {STACK_CONCEPT_LABEL.map((concept) => (
                 <li
                   key={concept}
                   className="flex items-start gap-3 rounded-[20px] border border-[#f4e4d8] bg-white/75 px-4 py-3 shadow-[0_8px_20px_rgba(213,154,134,0.06)] backdrop-blur-sm"
@@ -177,7 +151,7 @@ const AuthPage = ({ mode = "login" }) => {
             <div className="flex items-start justify-between gap-4">
               <div>
                 <p className="inline-flex rounded-full bg-[#fff3ec] px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-[#d07f71]">
-                  Taskyy access
+                  {AUTH_FORM_LABELS.TITLE}
                 </p>
                 <h2 className="mt-4 text-3xl font-semibold tracking-tight text-[#2f271f]">
                   {content.title}
@@ -189,10 +163,10 @@ const AuthPage = ({ mode = "login" }) => {
 
               <div className="hidden rounded-full border border-[#f1ded4] bg-[#fff8f3] p-1 shadow-[0_8px_24px_rgba(214,158,140,0.08)] sm:flex">
                 <NavLink to="/login" className={switchLinkClassName} end>
-                  Sign in
+                  {AUTH_FORM_LABELS.SINGIN_LABEL}
                 </NavLink>
                 <NavLink to="/signup" className={switchLinkClassName} end>
-                  Sign up
+                  {AUTH_FORM_LABELS.SINGUP_LABEL}
                 </NavLink>
               </div>
             </div>
@@ -210,7 +184,7 @@ const AuthPage = ({ mode = "login" }) => {
                 }
                 end
               >
-                Sign in
+                {AUTH_FORM_LABELS.SINGIN_LABEL}
               </NavLink>
               <NavLink
                 to="/signup"
@@ -224,7 +198,7 @@ const AuthPage = ({ mode = "login" }) => {
                 }
                 end
               >
-                Sign up
+                {AUTH_FORM_LABELS.SINGUP_LABEL}
               </NavLink>
             </div>
 
@@ -248,7 +222,7 @@ const AuthPage = ({ mode = "login" }) => {
                       className="h-4 w-4 text-[#d47f72]"
                       strokeWidth={2}
                     />
-                    Sign in with passkey
+                    {AUTH_FORM_LABELS.EXTRA_METHOD_LABEL_FIRST}
                   </button>
 
                   <div className="relative py-2">
@@ -257,7 +231,7 @@ const AuthPage = ({ mode = "login" }) => {
                     </div>
                     <div className="relative flex justify-center">
                       <span className="bg-white px-4 text-xs font-medium uppercase tracking-[0.2em] text-[#ab9d93]">
-                        or use email
+                        {AUTH_FORM_LABELS.EXTRA_METHOD_LABEL_SECOND}
                       </span>
                     </div>
                   </div>
@@ -413,14 +387,14 @@ const AuthPage = ({ mode = "login" }) => {
                       type="checkbox"
                       className="h-4 w-4 rounded border-[#ddcec4] text-[#ef9c8e] focus:ring-[#ffd8cb]"
                     />
-                    Remember me
+                    {AUTH_FORM_LABELS.REMEMBER_ME_LABEL}
                   </label>
 
                   <Link
                     to="/login"
                     className="text-sm font-medium text-[#cf7566] transition hover:text-[#b25d50]"
                   >
-                    Forgot password?
+                    {AUTH_FORM_LABELS.FORGOT_PASSWORD_LABEL}
                   </Link>
                 </div>
               ) : (
@@ -436,10 +410,7 @@ const AuthPage = ({ mode = "login" }) => {
                       }))
                     }
                   />
-                  <span>
-                    I agree to the terms of service and privacy policy for my
-                    Taskyy account.
-                  </span>
+                  <span>{AUTH_FORM_LABELS.PRIVACY_POLICY_LABEL}</span>
                 </label>
               )}
 
