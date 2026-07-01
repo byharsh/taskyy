@@ -7,7 +7,7 @@ export const getTodos = async (
   search = "",
 ) => {
   const response = await fetch(
-    `${API_BASE_URL}?project_id=${projectId}&limit=${limit}&offset=${offset}&search?title=${search}*`,
+    `${API_BASE_URL}?project_id=${projectId}&limit=${limit}&offset=${offset}&search?title=${search}`,
   );
   if (!response.ok) {
     throw new Error("Failed to fetch todos");

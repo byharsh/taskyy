@@ -1,5 +1,7 @@
-import avatar from "../../assets/images/avatar.jpg";
 import { useState } from "react";
+import { Link } from "react-router";
+
+import avatar from "../../assets/images/avatar.jpg";
 
 import { useAuth } from "../../features/auth/hooks/useAuth";
 import { useSidebarContext } from "../../features/sidebar-projects/context/SidebarContext";
@@ -12,10 +14,9 @@ import {
   SidebarUserSection,
 } from "../../features/sidebar-projects/components";
 
-import { Link } from "react-router";
-
 import { DEMO_PROJECTS } from "../../utils/PROJECTS";
 import { createProject } from "../../features/sidebar-projects/api/createProjects";
+import { SIDEBAR_LABELS } from "../constants/layoutConstants";
 
 const Sidebar = () => {
   const { isSidebarOpen } = useSidebarContext();
@@ -49,7 +50,7 @@ const Sidebar = () => {
       <div className="flex h-full min-h-0 flex-col">
         <SidebarUserSection
           avatarSrc={avatar}
-          userName={currentUser?.name ?? "Guest"}
+          userName={currentUser?.name ?? SIDEBAR_LABELS.GUEST_USER}
         />
 
         <div className="flex min-h-0 flex-1 flex-col overflow-hidden px-3 pt-2 sm:px-4 sm:pt-3 md:px-5">
