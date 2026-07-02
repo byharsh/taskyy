@@ -12,6 +12,7 @@ import {
   Rocket,
   X,
 } from "lucide-react";
+import { PROJECT_FORM } from "../constants/sidebarConstants";
 
 const iconCell =
   "flex h-9 w-9 shrink-0 items-center justify-center rounded-xl shadow-sm";
@@ -122,11 +123,13 @@ const SidebarNewProjectForm = ({ onConfirm, onCancel }) => {
           className="mt-3 w-full rounded-xl border border-neutral-200/60 bg-white px-3 py-2.5 text-sm font-medium text-neutral-800 outline-none ring-0 placeholder:text-neutral-400 focus:border-rose-200 focus:ring-2 focus:ring-rose-100"
         />
         {errors.project_name?.type === "required" && (
-          <p className="mt-1 text-xs text-red-600">Project name is required.</p>
+          <p className="mt-1 text-xs text-red-600">
+            {PROJECT_FORM.errorMessages.PROJECT_NAME}
+          </p>
         )}
         {errors.project_name?.type === "minLength" && (
           <p className="mt-1 text-xs text-red-600">
-            Project name must be at least 3 characters long.
+            {PROJECT_FORM.errorMessages.PROJECT_LENGTH}
           </p>
         )}
 
@@ -136,7 +139,7 @@ const SidebarNewProjectForm = ({ onConfirm, onCancel }) => {
             className="inline-flex cursor-pointer items-center gap-1.5 text-sm font-semibold text-emerald-600 transition hover:text-emerald-700"
           >
             <Check className="h-4 w-4" strokeWidth={2.25} aria-hidden />
-            Confirm
+            {PROJECT_FORM.CONFIRM_LABEL}
           </button>
 
           <button
@@ -144,7 +147,7 @@ const SidebarNewProjectForm = ({ onConfirm, onCancel }) => {
             className="inline-flex cursor-pointer items-center gap-1.5 text-sm font-semibold text-neutral-500 transition hover:text-neutral-700"
           >
             <X className="h-4 w-4" strokeWidth={2.25} aria-hidden />
-            Cancel
+            {PROJECT_FORM.CANCEL_LABEL}
           </button>
         </div>
       </form>

@@ -1,11 +1,9 @@
+import { ACHIEVEMENT_SECTION_LABEL } from "../constants/todoConstants";
+
 /**
  * Encouragement card below the list — cream panel, star, heading + subcopy.
  */
-const AchievementSection = ({
-  title = "You're doing amazing!",
-  subtitle = "Add more tasks and complete them to build momentum and celebrate your wins 🥂",
-  className = "",
-}) => {
+const AchievementSection = () => {
   return (
     <section
       className={`rounded-2xl border border-amber-100/60 bg-[#fffbeb] px-6 py-8 text-center shadow-[0_4px_20px_-4px_rgba(251,191,36,0.25)] ${className}`}
@@ -21,9 +19,11 @@ const AchievementSection = ({
         id="achievement-heading"
         className="text-lg font-semibold tracking-tight text-neutral-800"
       >
-        {title}
+        {ACHIEVEMENT_SECTION_LABEL.TITLE}
       </h2>
-      <p className="mt-2 text-sm leading-relaxed text-neutral-500">{subtitle}</p>
+      <p className="mt-2 text-sm leading-relaxed text-neutral-500">
+        {ACHIEVEMENT_SECTION_LABEL.SUBTITLE}
+      </p>
     </section>
   );
 };
