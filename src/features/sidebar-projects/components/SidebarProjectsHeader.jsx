@@ -1,10 +1,11 @@
 import { Plus } from "lucide-react";
+import { PROJECT_HEADER_LABELS } from "../constants/sidebarConstants";
 
 const SidebarProjectsHeader = ({ onPlusClick }) => {
   return (
     <div className="flex items-center justify-between px-1 pt-1">
       <span className="text-[11px] font-semibold uppercase tracking-[0.12em] text-neutral-400">
-        My projects
+        {PROJECT_HEADER_LABELS.TITLE}
       </span>
       <button
         type="button"

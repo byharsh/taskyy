@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 
 import { todoItemCardClass } from "./TodoItem";
 import TodoItemDragHandle from "./TodoItemDragHandle";
+import { TODO_FORM } from "../constants/todoConstants";
 
 const CATEGORY_OPTIONS = [
   { variant: "personal", label: "Personal" },
@@ -129,9 +130,6 @@ const TodoForm = forwardRef(function TodoForm({ onConfirm, onCancel }, ref) {
             {...register("task_title", { required: true, minLength: 2 })}
             // ref={inputRef}
             type="text"
-            // name="task"
-            // value={title}
-            // onChange={(e) => setTitle(e.target.value)}
             placeholder="write your next task"
             autoComplete="off"
             className={`${fieldSurfaceClass} min-h-[38px] min-w-0 flex-1`}
@@ -154,14 +152,14 @@ const TodoForm = forwardRef(function TodoForm({ onConfirm, onCancel }, ref) {
         </div>
         {errors.task_title && (
           <p className="text-sm text-red-600">
-            {errors.task_title.type === "required" && "A task is required."}
+            {errors.task_title.type === "required" && TODO_FORM.ERROR_REQUIRED}
             {errors.task_title.type === "minLength" &&
-              "Task must be at least 2 characters."}
+              TODO_FORM.ERROR_MIN_LENGTH}
           </p>
         )}
 
         <label className="sr-only" htmlFor="todo-category-trigger">
-          Category
+          {TODO_FORM.CATEGORY_LABEL}
         </label>
       </div>
     </form>

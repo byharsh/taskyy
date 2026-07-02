@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
-import { Bell, Menu, Search, X } from "lucide-react";
+import { Bell, Menu, Search, X } from "../../assets/icons.js";
+import { useSearchParams } from "react-router";
+
+import { HEADER_LABELS } from "../../shared/constants/layoutConstants.js";
 
 import { useDebounce } from "../../features/todos/hooks/useDebounce.js";
-
 import { useSidebarContext } from "../../features/sidebar-projects/context/SidebarContext.jsx";
-import { useSearchParams } from "react-router";
 
 const Header = ({ userName = "hard Working individual" }) => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -58,13 +59,13 @@ const Header = ({ userName = "hard Working individual" }) => {
 
         <div className="min-w-0">
           <h1 className="text-lg font-bold tracking-tight text-neutral-900 sm:text-xl">
-            Hello, {userName}!{" "}
+            {HEADER_LABELS.WELCOME_PREFIX}, {userName}!{" "}
             <span className="font-normal" aria-hidden>
-              👋
+              {HEADER_LABELS.WELCOME_PREFIX_EMOJI}
             </span>
           </h1>
           <p className="mt-0.5 text-sm text-neutral-500 sm:text-[15px]">
-            Let&apos;s make today productive and fun.
+            {HEADER_LABELS.WELCOME_SUFFIX}
           </p>
         </div>
       </div>
