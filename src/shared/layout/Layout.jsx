@@ -1,8 +1,8 @@
 import { Outlet } from "react-router";
 
-import { useAuth } from "../../features/auth/hooks/useAuth";
 import { SidebarProvider } from "../../features/sidebar-projects/context/SidebarContext";
 import { SearchProvider } from "../../features/todos/context/SearchContext";
+import { useAuth } from "../../features/auth/hooks/useAuth";
 
 import Sidebar from "./Sidebar";
 import Header from "./Header";

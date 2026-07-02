@@ -1,9 +1,10 @@
 import { Sparkles, Sun } from "lucide-react";
+import { USER_COMPLETED_LABEL } from "../constants/sidebarConstants";
 
 const SidebarUserSection = ({
   avatarSrc,
   userName = "Sarah Sunshine",
-  completedCount = "1,248",
+  completedCount = "0",
 }) => {
   return (
     <section className="shrink-0 rounded-b-2xl bg-[#f4efe8] px-4 pb-6 pt-5 text-center sm:px-5 md:px-6">
@@ -29,7 +30,7 @@ const SidebarUserSection = ({
         />
       </h2>
       <div className="mx-auto mt-2 inline-flex items-center gap-2 rounded-full border border-neutral-300/60 bg-white/70 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-wide text-neutral-400">
-        <span>Completed</span>
+        <span>{USER_COMPLETED_LABEL}</span>
         <span className="text-base font-bold normal-case tracking-normal text-teal-600">
           {completedCount}
         </span>
