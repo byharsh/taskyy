@@ -1,5 +1,5 @@
 //Auth page Constants
-export const STACK_CONCEPT_LABEL = [
+export const STACK_CONCEPTS = [
   "React components & JSX",
   "React Hooks (useState, useEffect, useContext)",
   "React Router (routing & protected routes)",
@@ -14,9 +14,9 @@ export const STACK_CONCEPT_LABEL = [
 ];
 
 export const STACK_CONCEPT_HEADERS = {
-  EYEBROW: "Skills in this project",
-  HEADING: "Built with modern web fundamentals",
-  DESCRIPTION:
+  eyebrow: "Skills in this project",
+  heading: "Built with modern web fundamentals",
+  description:
     "Taskyy uses the core React and web development skills that show up in real projects and job descriptions every day.",
 };
 
@@ -40,13 +40,13 @@ export const AUTH_LAYOUT_LABELS = {
 };
 
 export const AUTH_FORM_LABELS = {
-  TITLE: "Taskyy access",
-  SINGIN_LABEL: "Sign in",
-  SINGUP_LABEL: "Sign up",
-  EXTRA_METHOD_LABEL_FIRST: "Sign in with passkey",
-  EXTRA_METHOD_LABEL_SECOND: "or use email",
-  REMEMBER_ME_LABEL: "Remember me",
-  FORGOT_PASSWORD_LABEL: "Forgot password?",
-  PRIVACY_POLICY_LABEL:
+  title: "Taskyy access",
+  signIn: "Sign in",
+  signUp: "Sign up",
+  extraMethodFirst: "Sign in with passkey",
+  extraMethodSecond: "or use email",
+  rememberMe: "Remember me",
+  forgotPassword: "Forgot password?",
+  privacyPolicy:
     " I agree to the terms of service and privacy policy for my Taskyy account.",
 };
