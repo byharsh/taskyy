@@ -1,3 +1,4 @@
+import { Analytics } from "@vercel/analytics/react";
 import { Outlet } from "react-router";
 
 import { SidebarProvider } from "../../features/sidebar-projects/context/SidebarContext";
@@ -21,6 +22,7 @@ const Layout = () => {
             <Header userName={userName} />
             <main className="scrollbar-minimal-main min-h-0 flex-1 overflow-y-auto overscroll-y-contain">
               <Outlet />
+              <Analytics />
             </main>
             <Footer />
           </div>
