@@ -11,7 +11,7 @@ import {
 } from "lucide-react";
 
 import {
-  STACK_CONCEPT_LABEL,
+  STACK_CONCEPTS,
   AUTH_LAYOUT_LABELS,
   AUTH_FORM_LABELS,
   STACK_CONCEPT_HEADERS,
@@ -33,7 +33,7 @@ const switchLinkClassName = ({ isActive }) =>
 const AuthPage = ({ mode = "login" }) => {
   const isLogin = mode === "login";
 
-  const content = AUTH_FORM_LABELS[isLogin ? "login" : "signup"];
+  const content = AUTH_LAYOUT_LABELS[isLogin ? "login" : "signup"];
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -103,7 +103,7 @@ const AuthPage = ({ mode = "login" }) => {
   };
 
   return (
-    <main className="min-h-dvh bg-[radial-gradient(circle_at_top_left,_rgba(255,222,216,0.58),_transparent_35%),radial-gradient(circle_at_bottom_right,_rgba(255,246,214,0.54),_transparent_32%),linear-gradient(180deg,#fff8f3_0%,#fcf5f0_100%)] px-4 py-4 text-[#2f271f] sm:px-6 sm:py-6 lg:px-8">
+    <main className=" h-dvh bg-[radial-gradient(circle_at_top_left,_rgba(255,222,216,0.58),_transparent_35%),radial-gradient(circle_at_bottom_right,_rgba(255,246,214,0.54),_transparent_32%),linear-gradient(180deg,#fff8f3_0%,#fcf5f0_100%)] px-4 py-4 text-[#2f271f] sm:px-6 sm:py-6 lg:px-8">
       <div className="mx-auto grid min-h-[calc(100dvh-2rem)] max-w-6xl gap-5 lg:grid-cols-[1.03fr_0.97fr]">
         <section className="relative overflow-hidden rounded-[36px] border border-[#f0ddd2] bg-[linear-gradient(180deg,#fffdfb_0%,#fff6ef_100%)] p-6 shadow-[0_22px_60px_rgba(213,150,132,0.14)] sm:p-8 lg:p-10">
           <div className="absolute right-[-4rem] top-[-4rem] h-40 w-40 rounded-full bg-[#ffe7de] blur-3xl" />
@@ -112,18 +112,18 @@ const AuthPage = ({ mode = "login" }) => {
           <div className="relative flex h-full flex-col justify-center gap-8">
             <div className="max-w-xl space-y-4">
               <p className="inline-flex rounded-full border border-[#f1ddd0] bg-white/80 px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-[#9a8679] shadow-[0_8px_20px_rgba(215,160,144,0.1)] backdrop-blur-sm">
-                {STACK_CONCEPT_HEADERS.EYEBROW}
+                {STACK_CONCEPT_HEADERS.eyebrow}
               </p>
               <h1 className="text-3xl font-semibold tracking-tight text-[#2f271f] sm:text-4xl">
-                {STACK_CONCEPT_HEADERS.HEADING}
+                {STACK_CONCEPT_HEADERS.heading}
               </h1>
               <p className="max-w-lg text-sm leading-7 text-[#796e66] sm:text-[15px]">
-                {STACK_CONCEPT_HEADERS.DESCRIPTION}
+                {STACK_CONCEPT_HEADERS.description}
               </p>
             </div>
 
             <ul className="grid gap-3">
-              {STACK_CONCEPT_LABEL.map((concept) => (
+              {STACK_CONCEPTS.map((concept) => (
                 <li
                   key={concept}
                   className="flex items-start gap-3 rounded-[20px] border border-[#f4e4d8] bg-white/75 px-4 py-3 shadow-[0_8px_20px_rgba(213,154,134,0.06)] backdrop-blur-sm"
@@ -151,7 +151,7 @@ const AuthPage = ({ mode = "login" }) => {
             <div className="flex items-start justify-between gap-4">
               <div>
                 <p className="inline-flex rounded-full bg-[#fff3ec] px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-[#d07f71]">
-                  {AUTH_FORM_LABELS.TITLE}
+                  {AUTH_FORM_LABELS.title}
                 </p>
                 <h2 className="mt-4 text-3xl font-semibold tracking-tight text-[#2f271f]">
                   {content.title}
@@ -163,10 +163,10 @@ const AuthPage = ({ mode = "login" }) => {
 
               <div className="hidden rounded-full border border-[#f1ded4] bg-[#fff8f3] p-1 shadow-[0_8px_24px_rgba(214,158,140,0.08)] sm:flex">
                 <NavLink to="/login" className={switchLinkClassName} end>
-                  {AUTH_FORM_LABELS.SINGIN_LABEL}
+                  {AUTH_FORM_LABELS.signIn}
                 </NavLink>
                 <NavLink to="/signup" className={switchLinkClassName} end>
-                  {AUTH_FORM_LABELS.SINGUP_LABEL}
+                  {AUTH_FORM_LABELS.signUp}
                 </NavLink>
               </div>
             </div>
@@ -184,7 +184,7 @@ const AuthPage = ({ mode = "login" }) => {
                 }
                 end
               >
-                {AUTH_FORM_LABELS.SINGIN_LABEL}
+                {AUTH_FORM_LABELS.signIn}
               </NavLink>
               <NavLink
                 to="/signup"
@@ -198,7 +198,7 @@ const AuthPage = ({ mode = "login" }) => {
                 }
                 end
               >
-                {AUTH_FORM_LABELS.SINGUP_LABEL}
+                {AUTH_FORM_LABELS.signUp}
               </NavLink>
             </div>
 
@@ -222,7 +222,7 @@ const AuthPage = ({ mode = "login" }) => {
                       className="h-4 w-4 text-[#d47f72]"
                       strokeWidth={2}
                     />
-                    {AUTH_FORM_LABELS.EXTRA_METHOD_LABEL_FIRST}
+                    {AUTH_FORM_LABELS.extraMethodFirst}
                   </button>
 
                   <div className="relative py-2">
@@ -231,7 +231,7 @@ const AuthPage = ({ mode = "login" }) => {
                     </div>
                     <div className="relative flex justify-center">
                       <span className="bg-white px-4 text-xs font-medium uppercase tracking-[0.2em] text-[#ab9d93]">
-                        {AUTH_FORM_LABELS.EXTRA_METHOD_LABEL_SECOND}
+                        {AUTH_FORM_LABELS.extraMethodSecond}
                       </span>
                     </div>
                   </div>
@@ -387,14 +387,14 @@ const AuthPage = ({ mode = "login" }) => {
                       type="checkbox"
                       className="h-4 w-4 rounded border-[#ddcec4] text-[#ef9c8e] focus:ring-[#ffd8cb]"
                     />
-                    {AUTH_FORM_LABELS.REMEMBER_ME_LABEL}
+                    {AUTH_FORM_LABELS.rememberMe}
                   </label>
 
                   <Link
                     to="/login"
                     className="text-sm font-medium text-[#cf7566] transition hover:text-[#b25d50]"
                   >
-                    {AUTH_FORM_LABELS.FORGOT_PASSWORD_LABEL}
+                    {AUTH_FORM_LABELS.forgotPassword}
                   </Link>
                 </div>
               ) : (
@@ -410,7 +410,7 @@ const AuthPage = ({ mode = "login" }) => {
                       }))
                     }
                   />
-                  <span>{AUTH_FORM_LABELS.PRIVACY_POLICY_LABEL}</span>
+                  <span>{AUTH_FORM_LABELS.privacyPolicy}</span>
                 </label>
               )}
 
