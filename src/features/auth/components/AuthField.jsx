@@ -4,7 +4,7 @@ const fieldBaseClasses =
 const AuthField = ({
   id,
   label,
-  helperText,
+  helperText = "Use the same password you created for your workspace account.",
   rightSlot,
   className = "",
   ...props

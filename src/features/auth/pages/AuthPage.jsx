@@ -252,6 +252,7 @@ const AuthPage = ({ mode = "login" }) => {
                         strokeWidth={2}
                       />
                     }
+                    helperText="use testing email: goodadmin@gmail.com"
                   />
 
                   <AuthField
@@ -280,7 +281,7 @@ const AuthPage = ({ mode = "login" }) => {
                         )}
                       </button>
                     }
-                    helperText="Use the same password you created for your workspace account."
+                    helperText="use testing password: G00dAdmin123@#"
                   />
                 </>
               ) : (
